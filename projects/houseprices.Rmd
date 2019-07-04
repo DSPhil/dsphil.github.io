@@ -1,0 +1,340 @@
+---
+title: "Predicting House Prices"
+output: html_document
+---
+
+
+The Excel spreadsheet housedata.xls contains data on the sales of 950 single-family homes in Springfield, MA. We wish to explain and predict the price of a single-family home (Y, in thousands of dollars) using the following predictor variables:
+
+
+# Data Description and exploration
+
+Variable Name		      Description					                         
+
+s_p           Sale price in dollar				
+inv           Sale date inventory of homes on market			              
+bath          Number of bathrooms					                                
+ltsz          Lot size in acres						                      
+hssz          Sq. ft. of living area					                         
+bsemt         1 if basement, 0 otherwise				                        	
+a_c           1 if central a/c, 0 otherwise			                        	
+f_place       1 if fireplace, 0 otherwise					                        
+garsz_a       1 if garage, 0 otherwise					                          
+dinsp         1 if dining space, 0 otherwise		                      		
+dw            1 if dishwasher, 0 otherwise			                        	
+dr            1 if dining room, 0 otherwise				
+fr            1 if family room, 0 otherwise				
+age5          1 if age <= 5 yrs, 0 otherwise				
+stl10         1 if 1 story house, 0 otherwise				
+bdrms         Number of bedrooms					
+
+
+I start off with data exploration and some transformation. Afterwards, we will look into two types of modelling: explanatory and predictive. 
+Whereas the goal of explanatory analysis is to define which variables are most important to explain variance of the dependent variables (r-squared), the predictive model solely focuses on low prediction (RMSE as performance indicator for example) errors.
+
+
+```{r}
+#setting working directory and listing files in that directory
+
+rm(list = ls(all = TRUE))
+getwd()
+setwd("D:/Github/sites/datasciencephil.github.io/projects")
+
+#list.files()
+```
+
+
+```{r}
+# reading the file and looking at summary statistics
+
+require(readxl)
+require(psych)
+
+set.seed(1)
+
+dt = read_excel("housedata for final 2018.xlsx" )
+summary(dt)
+describe(dt)
+```
+
+We can see there are some outliers. One has to distinguish between data that "just does not look right", like 20 bathrooms or a very high house price, but it is possible and a negative number of bedrooms, which is an obvious error. All the numbers in the dataset have to be positive, so we get rid of negative amounts of bedrooms. In addition, I will search the house with 20 bathrooms and change it to 2, as I think there was just an error and a 0 was added by accident. 
+
+
+### Data Prep (1): outliers
+
+In this part we have a look at the data and potential outliers and how to treat these.
+
+```{r}
+# removal of outliers
+
+require(readxl)
+hd = read_excel("housedata for final 2018.xlsx" )
+
+# acre to sqfeet
+hd$ltsznew <- hd$ltsz*43560
+
+# outlier treatment, alter to median
+hd$hssz[hd$hssz > 2200 ] <- median(hd$hssz)
+hd$ltsznew[hd$ltsznew > 500000 ] <- median(hd$ltsznew)
+hd$garsz_a[hd$garsz_a > 1 ] <- median(hd$garsz_a)
+hd$bdrms[hd$bdrms < 0 ] <- median(hd$bdrms)
+hd$bath[hd$bath > 10 ] <- median(hd$bath)
+
+# I looked at the ratio from hssz to ltsznew and 5 houses were bigger than the lot. I assumed thats a mistake as well and multiplied lots by 10
+hd$ratio <- hd$hssz/hd$ltsznew
+summary(hd$ratio)
+
+hd$ltsznew[hd$ratio >1] <- hd$ltsznew[hd$ratio>1]*10
+hd$ratio[hd$ratio > 1]
+hd$ltsznew[hd$ratio>1]
+hd$hssz[hd$ratio>1]
+
+# some sanity checks
+mean(hd$hssz)
+mean(hd$ltsznew)
+median(hd$hssz)
+median(hd$ltsznew)
+
+```
+
+### Data Prep (2): Transformation
+
+Especially prices are usually skewed, so I will look at possible transformations here as well as for house sizes etc.. In addition, I think we can introduce some additional business knowledge here, by creating a new variable, such as: number of bedrooms/number of bathrooms as 2 bed/2bath or 3bed/3bath are usually more expensive than 2bed/1 bath or 5bed/1bath. 
+
+```{r}
+dt = as.data.frame(hd)
+a = names(dt)
+
+#we can check all most common transformations (log, cube- and squareroot) with a loop and print the qqplots to see if we can come close to a normal distribution with transformations
+
+for (i in a) {  
+  qqnorm(dt[, i], main = c("norm",names(dt[i])))
+  qqline(dt[, i], main = names(dt[i]))
+  qqnorm((dt[, i])^(1/2), main = c("sqroot", names(dt[i])))
+  qqnorm((dt[, i])^(1/3), main = c("cuberoot", names(dt[i])))
+  ifelse(0 %in% dt[,i], print("no"),qqnorm(log(dt[, i]), main = c("log", names(dt[i]))))
+}
+
+
+# Based on these plots I am going to apply the following transformations:
+hd$s_p_log = log(hd$s_p)
+hd$inv_log = log(hd$inv)
+hd$ltsznew_log = log(hd$ltsznew)
+hd$ratio_log= log(hd$ratio)
+
+#additional variable
+hd$bedbath = hd$bath/hd$bdrms
+
+```
+
+
+
+
+# Explanatory data Analysis
+
+I am using linear regression here to find the most important independent variables that explain the house price best.
+
+```{r}
+#if(!require(devtools)) install.packages("devtools")
+#devtools::install_github("kassambara/ggcorrplot")
+library(ggcorrplot)
+
+corr <- cor(hd)
+ggcorrplot(corr, outline.col = "white")
+
+as.data.frame(colnames(hd))
+
+# we cannot use some variables together
+
+'
+s_p				
+s_p_log     x
+inv		     		
+bath			  x	
+ltsz				
+hssz			  x	
+bsemt			  x	
+a_c				  x
+f_place		  x		
+garsz_a		  x		
+dw          x
+dr				  x
+fr				  x
+age5			  x	
+stl10			  x	
+bdrms		    x		
+ltsznew	    x			
+ratio		    x		
+inv_log				
+ltsznew_log	x			
+ratio_log   
+bedbath     x
+
+
+ratio_log shows multicorr so we use ratio instead as variable in the model
+'
+
+```
+
+## Linear regression with stepwise
+
+```{r}
+
+# defining the smallest, simplest model possible
+SmallFm <- s_p_log ~ 1
+Vars <- names(hd)
+
+#getting rid of possible spaces in variable names
+Vars <- gsub(" ", "", Vars, fixed = TRUE)
+
+# defining the biggest, most complex model with all variables
+BigFm <- paste(Vars[18],"~",paste(Vars[c(3,5:17,19,20,22)],collapse=" + "),sep=" ")
+BigFm <- formula(BigFm)
+
+OutSmall <- glm(SmallFm,data=hd)
+OutBig <- glm(BigFm,data=hd)
+#summary(OutSmall)
+#summary(OutBig)
+
+#stepwise part
+sc <- list(lower=SmallFm,upper=BigFm)
+out <- step(OutSmall,scope=sc,direction="both", trace = 0) #with trace = 0 we do not print all steps, only the last with final model, otherwise console can get pretty crowded
+summary(out)
+#AIC(out)
+
+#We use the variables chosen by stepwise to build the final model
+#Important: As we have variables like counts here (bedrooms and bathrooms) that are very important for houseprices, we can use factor of these variables for better results
+fromstepwise <- lm(s_p ~ factor(bath) + ltsznew_log + f_place + factor(bdrms) + age5 + dr + bsemt + hssz + a_c + ltsznew + stl10 + inv_log, data = hd)
+summary(fromstepwise)
+
+# we then remove variables with low p value, as the goal is to find (the least) variables that explain the model. the goal is a simple model with best explanatory power!
+simpler <- lm(s_p_log ~ factor(bath) + ltsznew_log + f_place + bdrms + age5 + dr + bsemt + hssz + stl10, data = hd)
+summary(simpler)
+
+```
+
+
+# Predictive Data Analysis
+
+Here, multicollinearity is not important. All we care about is predictive power, so we use all variables we created and the model will pick whatever suits best to minimze prediction error. Machine learning can be used to develop advanced models, however, if we are aware of specific (business) knowledge, we should introduce this to our model (like the bedroom/bathroom ratio) and thus make it "easier" for the algorithm to find the best model and variables. We will use RMSE in this example. Really bad prediction errors will be penalized relatively more than small errors (squared).
+
+```{r}
+# we need to split into train and test sets as well as evaluation set)
+set.seed(1) # to gain reproducible results
+
+wh <- sample(nrow(hd),size=ceiling(nrow(hd)*0.6))
+TrainData <- hd[wh,]
+TmpData <- hd[-wh,]
+wh <- sample(nrow(TmpData),size=ceiling(nrow(TmpData)*0.5))
+ValData <- TmpData[wh,]
+TestData <- TmpData[-wh,]
+```
+
+## Linear Regression (will add lasso and ridge)
+
+```{r}
+# linear regression
+
+library(Metrics) #for rmse
+
+Fm <- lm(s_p ~ bath + hssz + bsemt + a_c + f_place + garsz_a + dw + 
+    dr + fr + age5 + stl10 + bdrms + ltsznew + ratio + inv_log + 
+    ltsznew_log + bedbath, data = TrainData)
+
+ypred <- predict.lm(Fm, newdata=ValData)
+
+rmse(ValData$s_p,ypred)
+
+```
+
+## Regression Trees and meta modelling
+
+```{r}
+# regression tree 
+
+if(!require("tree")) { install.packages("tree"); require("tree") }
+
+Form = formula(s_p ~ bath + hssz + bsemt + a_c + f_place + garsz_a + 
+    dw + dr + fr + age5 + stl10 + bdrms + ltsznew + ratio + inv_log + 
+    ltsznew_log + bedbath)
+
+tree.model <- tree(Form, data = TrainData)
+ypred_tree <- predict(tree.model, data=ValData)
+#plot(tree.model)
+#plot.new()
+#text(tree.model)
+#print(tree.model)
+#number of nodes
+nrow(tree.model$frame)
+
+#initial rmse
+rmse(ValData$s_p,ypred_tree)
+
+
+#optimize tree with finding best tree size
+#1. step: Fit the full tree once
+tc2 <- tree.control(nrow(TrainData),minsize=2,mincut=1,mindev=0)
+out2 <- tree(Form,data=TrainData,control=tc2, method = "deviance")
+
+#plot(out2)
+#print(out2)
+#summary(out2)
+
+# get the # of end nodes
+NNodes <- summary(out2)$size
+
+#number of nodes to choose from
+#NNodes
+
+#2. step: run loop with different # of nodes
+#output <- rep(NA,NNodes)
+output <- data.frame(nodes = 1:NNodes, error = rep(NA, NNodes))
+
+for(NNodes in 3:NNodes) {
+  out22 <- prune.tree(out2,best=NNodes)
+  ypred_best <- predict(out22,newdata=ValData)
+  output$error[NNodes] <- rmse(ValData$s_p,ypred_best)
+}
+
+#we can cut (subset) the dataframe to get rid of the first NAs
+#result = results[3:NNodes,]
+
+#the minimum rmse 
+min(output$error, na.rm=T)
+
+#the number of nodes of our best tree (with optimized nodes)
+output[output$error == min(output[,"error"], na.rm=T), "nodes"]
+
+```
+
+```{r}
+#random forest
+library("randomForest")
+
+#mtry is important here, for regression we use 1/3 of the total # of independent variables, for classification the squareroot
+
+out4 <- randomForest(Form, mtry = length(all.vars(Form))/3, data=TrainData, ntree=500) #mtry is 1/3 of all variables for regression, for classification it is sqrt(variables)
+ypred_random <- predict(out4,newdata=ValData)
+rmse(ValData$s_p,ypred_random) 
+
+```
+
+```{r}
+#bagging
+
+#for mtry we use all independent variables (as opposed to random forest)
+
+out3  <- randomForest(Form,data=TrainData, mtry=length(all.vars(Form))-1, ntree=500)
+ypred_bagging <- predict(out3,newdata=ValData)
+rmse(ValData$s_p,ypred_bagging) 
+
+```
+
+## random forest is the best model on validation so we can use it now on test data for final prediction
+
+```{r}
+out4 <- randomForest(Form, mtry = length(all.vars(Form))/3, data=TrainData, ntree=500)
+ypred_random <- predict(out4,newdata=TestData)
+rmse(TestData$s_p,ypred_random) 
+```
+
