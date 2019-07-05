@@ -196,23 +196,23 @@ $(document).ready(function () {
 <p>The Excel spreadsheet housedata.xls contains data on the sales of 950 single-family homes in Springfield, MA. We wish to explain and predict the price of a single-family home (Y, in thousands of dollars) using the following predictor variables:</p>
 <div id="data-description-and-exploration" class="section level1">
 <h1>Data Description and exploration</h1>
-<p>Variable Name Description</p>
-<p>s_p Sale price in dollar<br />
-inv Sale date inventory of homes on market<br />
-bath Number of bathrooms<br />
-ltsz Lot size in acres<br />
-hssz Sq. ft. of living area<br />
-bsemt 1 if basement, 0 otherwise<br />
-a_c 1 if central a/c, 0 otherwise<br />
-f_place 1 if fireplace, 0 otherwise<br />
-garsz_a 1 if garage, 0 otherwise<br />
-dinsp 1 if dining space, 0 otherwise<br />
-dw 1 if dishwasher, 0 otherwise<br />
-dr 1 if dining room, 0 otherwise<br />
-fr 1 if family room, 0 otherwise<br />
-age5 1 if age &lt;= 5 yrs, 0 otherwise<br />
-stl10 1 if 1 story house, 0 otherwise<br />
-bdrms Number of bedrooms</p>
+<p>Variable——Description</p>
+<p>s_p———–Sale price in dollar<br />
+inv———–Sale date inventory of homes on market<br />
+bath———-Number of bathrooms<br />
+ltsz———-Lot size in acres<br />
+hssz———-Sq. ft. of living area<br />
+bsemt———1 if basement, 0 otherwise<br />
+a_c———–1 if central a/c, 0 otherwise<br />
+f_place——-1 if fireplace, 0 otherwise<br />
+garsz_a——-1 if garage, 0 otherwise<br />
+dinsp———1 if dining space, 0 otherwise<br />
+dw————1 if dishwasher, 0 otherwise<br />
+dr————1 if dining room, 0 otherwise<br />
+fr————1 if family room, 0 otherwise<br />
+age5———-1 if age &lt;= 5 yrs, 0 otherwise<br />
+stl10———1 if 1 story house, 0 otherwise<br />
+bdrms———Number of bedrooms</p>
 <p>I start off with data exploration and some transformation. Afterwards, we will look into two types of modelling: explanatory and predictive. Whereas the goal of explanatory analysis is to define which variables are most important to explain variance of the dependent variables (r-squared), the predictive model solely focuses on low prediction (RMSE as performance indicator for example) errors.</p>
 <pre class="r"><code>#setting working directory and listing files in that directory
 
@@ -221,12 +221,7 @@ getwd()</code></pre>
 <pre><code>## [1] &quot;D:/Github/sites/datasciencephil.github.io/projects&quot;</code></pre>
 <pre class="r"><code>setwd(&quot;D:/Github/sites/datasciencephil.github.io/projects&quot;)
 
-list.files()</code></pre>
-<pre><code>## [1] &quot;~$0 Final Quiz 2018.docx&quot;         &quot;670 Final Quiz 2018, 2369715.pdf&quot;
-## [3] &quot;670 Final Quiz 2018.docx&quot;         &quot;Final Code.docx&quot;                 
-## [5] &quot;housedata for final 2018.xlsx&quot;    &quot;houseprices.html&quot;                
-## [7] &quot;houseprices.Rmd&quot;                  &quot;HW2 pscherb.docx&quot;                
-## [9] &quot;titanic_train.csv&quot;</code></pre>
+#list.files()</code></pre>
 <pre class="r"><code># reading the file and looking at summary statistics
 
 require(readxl)</code></pre>
@@ -299,8 +294,8 @@ summary(dt)</code></pre>
 ## stl10        1.00      1.00  0.11    -1.99   0.02
 ## bdrms        6.00     10.00 -0.60    11.49   0.02</code></pre>
 <p>We can see there are some outliers. One has to distinguish between data that “just does not look right”, like 20 bathrooms or a very high house price, but it is possible and a negative number of bedrooms, which is an obvious error. All the numbers in the dataset have to be positive, so we get rid of negative amounts of bedrooms. In addition, I will search the house with 20 bathrooms and change it to 2, as I think there was just an error and a 0 was added by accident.</p>
-<div id="data-prep-1-outliers" class="section level2">
-<h2>Data Prep (1): outliers</h2>
+<div id="data-prep-1-outliers" class="section level3">
+<h3>Data Prep (1): outliers</h3>
 <p>In this part we have a look at the data and potential outliers and how to treat these.</p>
 <pre class="r"><code># removal of outliers
 
@@ -339,13 +334,13 @@ mean(hd$hssz)</code></pre>
 <pre class="r"><code>median(hd$ltsznew)</code></pre>
 <pre><code>## [1] 9800</code></pre>
 </div>
-<div id="data-prep-2-transformation" class="section level2">
-<h2>Data Prep (2): Transformation</h2>
+<div id="data-prep-2-transformation" class="section level3">
+<h3>Data Prep (2): Transformation</h3>
 <p>Especially prices are usually skewed, so I will look at possible transformations here as well as for house sizes etc.. In addition, I think we can introduce some additional business knowledge here, by creating a new variable, such as: number of bedrooms/number of bathrooms as 2 bed/2bath or 3bed/3bath are usually more expensive than 2bed/1 bath or 5bed/1bath.</p>
 <pre class="r"><code>dt = as.data.frame(hd)
 a = names(dt)
 
-#we can check all most common transformations with a loop
+#we can check all most common transformations (log, cube- and squareroot) with a loop and print the qqplots to see if we can come close to a normal distribution with transformations
 
 for (i in a) {  
   qqnorm(dt[, i], main = c(&quot;norm&quot;,names(dt[i])))
@@ -426,20 +421,20 @@ ggcorrplot(corr, outline.col = &quot;white&quot;)</code></pre>
 
 '
 s_p             
-s_p_log    x
+s_p_log     x
 inv                 
-bath             x  
+bath              x 
 ltsz                
-hssz             x  
-bsemt            x  
-a_c              x
-f_place      x      
-garsz_a      x      
-dw         x
-dr               x
-fr               x
-age5             x  
-stl10            x  
+hssz              x 
+bsemt             x 
+a_c               x
+f_place       x     
+garsz_a       x     
+dw          x
+dr                x
+fr                x
+age5              x 
+stl10             x 
 bdrms           x       
 ltsznew     x           
 ratio           x       
@@ -447,17 +442,22 @@ inv_log
 ltsznew_log x           
 ratio_log   
 bedbath     x
+
+
 ratio_log shows multicorr so we use ratio instead as variable in the model
 '</code></pre>
-<pre><code>## [1] &quot;\ns_p\t\t\t\t\ns_p_log    x\ninv\t\t     \t\t\nbath\t\t\t x\t\nltsz\t\t\t\t\nhssz\t\t\t x\t\nbsemt\t\t\t x\t\na_c\t\t\t\t x\nf_place\t\t x\t\t\ngarsz_a\t\t x\t\t\ndw         x\ndr\t\t\t\t x\nfr\t\t\t\t x\nage5\t\t\t x\t\nstl10\t\t\t x\t\nbdrms\t\t    x\t\t\nltsznew\t    x\t\t\t\nratio\t\t    x\t\t\ninv_log\t\t\t\t\nltsznew_log\tx\t\t\t\nratio_log   \nbedbath     x\nratio_log shows multicorr so we use ratio instead as variable in the model\n&quot;</code></pre>
+<pre><code>## [1] &quot;\ns_p\t\t\t\t\ns_p_log     x\ninv\t\t     \t\t\nbath\t\t\t  x\t\nltsz\t\t\t\t\nhssz\t\t\t  x\t\nbsemt\t\t\t  x\t\na_c\t\t\t\t  x\nf_place\t\t  x\t\t\ngarsz_a\t\t  x\t\t\ndw          x\ndr\t\t\t\t  x\nfr\t\t\t\t  x\nage5\t\t\t  x\t\nstl10\t\t\t  x\t\nbdrms\t\t    x\t\t\nltsznew\t    x\t\t\t\nratio\t\t    x\t\t\ninv_log\t\t\t\t\nltsznew_log\tx\t\t\t\nratio_log   \nbedbath     x\n\n\nratio_log shows multicorr so we use ratio instead as variable in the model\n&quot;</code></pre>
 <div id="linear-regression-with-stepwise" class="section level2">
 <h2>Linear regression with stepwise</h2>
-<pre class="r"><code>SmallFm &lt;- s_p_log ~ 1
+<pre class="r"><code># defining the smallest, simplest model possible
+SmallFm &lt;- s_p_log ~ 1
 Vars &lt;- names(hd)
+
 #getting rid of possible spaces in variable names
 Vars &lt;- gsub(&quot; &quot;, &quot;&quot;, Vars, fixed = TRUE)
-BigFm &lt;- paste(Vars[18],&quot;~&quot;,paste(Vars[c(3,5:17,19,20,22)],collapse=&quot; + &quot;),sep=&quot; &quot;)
 
+# defining the biggest, most complex model with all variables
+BigFm &lt;- paste(Vars[18],&quot;~&quot;,paste(Vars[c(3,5:17,19,20,22)],collapse=&quot; + &quot;),sep=&quot; &quot;)
 BigFm &lt;- formula(BigFm)
 
 OutSmall &lt;- glm(SmallFm,data=hd)
@@ -467,7 +467,7 @@ OutBig &lt;- glm(BigFm,data=hd)
 
 #stepwise part
 sc &lt;- list(lower=SmallFm,upper=BigFm)
-out &lt;- step(OutSmall,scope=sc,direction=&quot;both&quot;, trace = 0)
+out &lt;- step(OutSmall,scope=sc,direction=&quot;both&quot;, trace = 0) #with trace = 0 we do not print all steps, only the last with final model, otherwise console can get pretty crowded
 summary(out)</code></pre>
 <pre><code>## 
 ## Call:
@@ -506,10 +506,8 @@ summary(out)</code></pre>
 ## Number of Fisher Scoring iterations: 2</code></pre>
 <pre class="r"><code>#AIC(out)
 
-#we use the variables chosen by stepwise to build the final model
-
-#As we have variables like counts here (bedrooms and bathrooms) that are very important for houseprices, we can use factor of these variables for better results
-
+#We use the variables chosen by stepwise to build the final model
+#Important: As we have variables like counts here (bedrooms and bathrooms) that are very important for houseprices, we can use factor of these variables for better results
 fromstepwise &lt;- lm(s_p ~ factor(bath) + ltsznew_log + f_place + factor(bdrms) + age5 + dr + bsemt + hssz + a_c + ltsznew + stl10 + inv_log, data = hd)
 summary(fromstepwise)</code></pre>
 <pre><code>## 
@@ -553,7 +551,6 @@ summary(fromstepwise)</code></pre>
 ## Multiple R-squared:  0.6663, Adjusted R-squared:  0.6588 
 ## F-statistic: 88.24 on 21 and 928 DF,  p-value: &lt; 2.2e-16</code></pre>
 <pre class="r"><code># we then remove variables with low p value, as the goal is to find (the least) variables that explain the model. the goal is a simple model with best explanatory power!
-
 simpler &lt;- lm(s_p_log ~ factor(bath) + ltsznew_log + f_place + bdrms + age5 + dr + bsemt + hssz + stl10, data = hd)
 summary(simpler)</code></pre>
 <pre><code>## 
@@ -594,8 +591,8 @@ summary(simpler)</code></pre>
 <h1>Predictive Data Analysis</h1>
 <p>Here, multicollinearity is not important. All we care about is predictive power, so we use all variables we created and the model will pick whatever suits best to minimze prediction error. Machine learning can be used to develop advanced models, however, if we are aware of specific (business) knowledge, we should introduce this to our model (like the bedroom/bathroom ratio) and thus make it “easier” for the algorithm to find the best model and variables. We will use RMSE in this example. Really bad prediction errors will be penalized relatively more than small errors (squared).</p>
 <pre class="r"><code># we need to split into train and test sets as well as evaluation set)
+set.seed(1) # to gain reproducible results
 
-set.seed(1)
 wh &lt;- sample(nrow(hd),size=ceiling(nrow(hd)*0.6))
 TrainData &lt;- hd[wh,]
 TmpData &lt;- hd[-wh,]
@@ -640,8 +637,7 @@ nrow(tree.model$frame)</code></pre>
 rmse(ValData$s_p,ypred_tree)</code></pre>
 <pre><code>## [1] 36036.04</code></pre>
 <pre class="r"><code>#optimize tree with finding best tree size
-
-# Fit the full tree once
+#1. step: Fit the full tree once
 tc2 &lt;- tree.control(nrow(TrainData),minsize=2,mincut=1,mindev=0)
 out2 &lt;- tree(Form,data=TrainData,control=tc2, method = &quot;deviance&quot;)
 
@@ -655,7 +651,7 @@ NNodes &lt;- summary(out2)$size
 #number of nodes to choose from
 #NNodes
 
-# Find the best tree size
+#2. step: run loop with different # of nodes
 #output &lt;- rep(NA,NNodes)
 output &lt;- data.frame(nodes = 1:NNodes, error = rep(NA, NNodes))
 
@@ -686,11 +682,15 @@ library(&quot;randomForest&quot;)</code></pre>
 <pre><code>## The following object is masked from 'package:psych':
 ## 
 ##     outlier</code></pre>
-<pre class="r"><code>out4 &lt;- randomForest(Form, mtry = length(all.vars(Form))/3, data=TrainData, ntree=500) #mtry is 1/3 of all variables for regression, for classification it is sqrt(variables)
+<pre class="r"><code>#mtry is important here, for regression we use 1/3 of the total # of independent variables, for classification the squareroot
+
+out4 &lt;- randomForest(Form, mtry = length(all.vars(Form))/3, data=TrainData, ntree=500) #mtry is 1/3 of all variables for regression, for classification it is sqrt(variables)
 ypred_random &lt;- predict(out4,newdata=ValData)
 rmse(ValData$s_p,ypred_random) </code></pre>
 <pre><code>## [1] 15824.54</code></pre>
 <pre class="r"><code>#bagging
+
+#for mtry we use all independent variables (as opposed to random forest)
 
 out3  &lt;- randomForest(Form,data=TrainData, mtry=length(all.vars(Form))-1, ntree=500)
 ypred_bagging &lt;- predict(out3,newdata=ValData)
@@ -699,7 +699,7 @@ rmse(ValData$s_p,ypred_bagging) </code></pre>
 </div>
 <div id="random-forest-is-the-best-model-on-validation-so-we-can-use-it-now-on-test-data-for-final-prediction" class="section level2">
 <h2>random forest is the best model on validation so we can use it now on test data for final prediction</h2>
-<pre class="r"><code>out4 &lt;- randomForest(Form, mtry = length(all.vars(Form))/3, data=TrainData, ntree=500) #mtry is 1/3 of all variables for regression, for classification it is sqrt(variables)
+<pre class="r"><code>out4 &lt;- randomForest(Form, mtry = length(all.vars(Form))/3, data=TrainData, ntree=500)
 ypred_random &lt;- predict(out4,newdata=TestData)
 rmse(TestData$s_p,ypred_random) </code></pre>
 <pre><code>## [1] 17558.77</code></pre>
