@@ -9,24 +9,24 @@ The Excel spreadsheet housedata.xls contains data on the sales of 950 single-fam
 
 # Data Description and exploration
 
-Variable Name		      Description					                         
+Variable------Description					                         
 
-s_p           Sale price in dollar				
-inv           Sale date inventory of homes on market			              
-bath          Number of bathrooms					                                
-ltsz          Lot size in acres						                      
-hssz          Sq. ft. of living area					                         
-bsemt         1 if basement, 0 otherwise				                        	
-a_c           1 if central a/c, 0 otherwise			                        	
-f_place       1 if fireplace, 0 otherwise					                        
-garsz_a       1 if garage, 0 otherwise					                          
-dinsp         1 if dining space, 0 otherwise		                      		
-dw            1 if dishwasher, 0 otherwise			                        	
-dr            1 if dining room, 0 otherwise				
-fr            1 if family room, 0 otherwise				
-age5          1 if age <= 5 yrs, 0 otherwise				
-stl10         1 if 1 story house, 0 otherwise				
-bdrms         Number of bedrooms					
+s_p-----------Sale price in dollar				
+inv-----------Sale date inventory of homes on market			              
+bath----------Number of bathrooms					                                
+ltsz----------Lot size in acres						                      
+hssz----------Sq. ft. of living area					                         
+bsemt---------1 if basement, 0 otherwise				                        	
+a_c-----------1 if central a/c, 0 otherwise			                        	
+f_place-------1 if fireplace, 0 otherwise					                        
+garsz_a-------1 if garage, 0 otherwise					                          
+dinsp---------1 if dining space, 0 otherwise		                      		
+dw------------1 if dishwasher, 0 otherwise			                        	
+dr------------1 if dining room, 0 otherwise				
+fr------------1 if family room, 0 otherwise				
+age5----------1 if age <= 5 yrs, 0 otherwise				
+stl10---------1 if 1 story house, 0 otherwise				
+bdrms---------Number of bedrooms					
 
 
 I start off with data exploration and some transformation. Afterwards, we will look into two types of modelling: explanatory and predictive. 
