@@ -640,7 +640,7 @@ footer {
 */
 
 #projects {
-    padding: 50px 15px;
+    padding: 20px 15px;
     border-bottom: 1px solid $border;
     text-align: center;
 
@@ -679,8 +679,8 @@ footer {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    margin-left: 300px;
-    padding: 15px;
+    margin-left: 175px;
+    padding: 10px;
 
     h3 {
         font-size: 1.5em;
@@ -700,8 +700,8 @@ footer {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    margin-right: 300px;
-    padding: 15px;
+    margin-right: 175px;
+    padding: 10px;
 
     h3 {
         font-size: 1.5em;
@@ -717,12 +717,14 @@ footer {
     }
 }
 
+
+
 .no-image {
     .project-info {
         position: relative;
         max-width: 900px;
         margin: 0;
-        padding: 30px 15px;
+        padding: 10px 10px;
         transform: none;
     }
 }
