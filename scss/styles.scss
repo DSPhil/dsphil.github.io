@@ -454,7 +454,7 @@ footer {
 
 #about {
     padding: 75px 15px;
-    text-align: center;
+    text-align: justify;
     border-bottom: 1px solid $border;
 
     h2 {
@@ -540,6 +540,7 @@ footer {
         color: $text;
         font-size: 0.9em;
         margin: 0;
+        text-align: justify;
     }
 }
 
