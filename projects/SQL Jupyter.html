@@ -11775,13 +11775,21 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Importing-libraries">Importing libraries<a class="anchor-link" href="#Importing-libraries">&#182;</a></h2>
+<h1 id="Top-10-SQL-queries-with-focus-on-ETL---and-some-analysis">Top 10 SQL queries with focus on ETL - and some analysis<a class="anchor-link" href="#Top-10-SQL-queries-with-focus-on-ETL---and-some-analysis">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Importing-libraries">Importing libraries<a class="anchor-link" href="#Importing-libraries">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
@@ -11804,13 +11812,13 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="converting-csv-to-sql-database">converting csv to sql database<a class="anchor-link" href="#converting-csv-to-sql-database">&#182;</a></h2>
+<h3 id="converting-csv-to-sql-database">converting csv to sql database<a class="anchor-link" href="#converting-csv-to-sql-database">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[30]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s2">&quot;customers.xlsx&quot;</span><span class="p">)</span>
@@ -11829,13 +11837,13 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Starting-queries">Starting queries<a class="anchor-link" href="#Starting-queries">&#182;</a></h2>
+<h3 id="Starting-queries">Starting queries<a class="anchor-link" href="#Starting-queries">&#182;</a></h3><h4 id="Our-data-consists-of-insurance-data,-the-first-table-is-about-the-customer-and-stores-data-like-age-and-bmi,-whereas-the-second-table-stores-region-and-charges.-Both-have-an-id-that-serves-as-key-for-both-tables.">Our data consists of insurance data, the first table is about the customer and stores data like age and bmi, whereas the second table stores region and charges. Both have an id that serves as key for both tables.<a class="anchor-link" href="#Our-data-consists-of-insurance-data,-the-first-table-is-about-the-customer-and-stores-data-like-age-and-bmi,-whereas-the-second-table-stores-region-and-charges.-Both-have-an-id-that-serves-as-key-for-both-tables.">&#182;</a></h4>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[31]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM customers limit 5&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
@@ -11851,7 +11859,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[31]:</div>
+<div class="prompt output_prompt">Out[3]:</div>
 
 
 
@@ -11941,7 +11949,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM bills limit 5&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
@@ -11957,7 +11965,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[15]:</div>
+<div class="prompt output_prompt">Out[4]:</div>
 
 
 
@@ -12037,10 +12045,12 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[62]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;SELECT * FROM insurance WHERE sex = &#39;female&#39; limit 5&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;SELECT * </span>
+<span class="s2">               FROM customers </span>
+<span class="s2">               WHERE sex = &#39;female&#39; limit 5&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12053,7 +12063,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[62]:</div>
+<div class="prompt output_prompt">Out[5]:</div>
 
 
 
@@ -12076,65 +12086,59 @@ div#notebook {
   <thead>
     <tr style="text-align: right;">
       <th></th>
+      <th>id</th>
       <th>age</th>
       <th>sex</th>
       <th>bmi</th>
       <th>children</th>
       <th>smoker</th>
-      <th>region</th>
-      <th>charges</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
+      <td>1</td>
       <td>19</td>
       <td>female</td>
       <td>27.90</td>
       <td>0</td>
       <td>yes</td>
-      <td>southwest</td>
-      <td>16884.92400</td>
     </tr>
     <tr>
       <th>1</th>
+      <td>6</td>
       <td>31</td>
       <td>female</td>
       <td>25.74</td>
       <td>0</td>
       <td>no</td>
-      <td>southeast</td>
-      <td>3756.62160</td>
     </tr>
     <tr>
       <th>2</th>
+      <td>7</td>
       <td>46</td>
       <td>female</td>
       <td>33.44</td>
       <td>1</td>
       <td>no</td>
-      <td>southeast</td>
-      <td>8240.58960</td>
     </tr>
     <tr>
       <th>3</th>
+      <td>8</td>
       <td>37</td>
       <td>female</td>
       <td>27.74</td>
       <td>3</td>
       <td>no</td>
-      <td>northwest</td>
-      <td>7281.50560</td>
     </tr>
     <tr>
       <th>4</th>
+      <td>10</td>
       <td>60</td>
       <td>female</td>
       <td>25.84</td>
       <td>0</td>
       <td>no</td>
-      <td>northwest</td>
-      <td>28923.13692</td>
     </tr>
   </tbody>
 </table>
@@ -12149,7 +12153,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#df.loc[df[&quot;sex&quot;]==&quot;female&quot;,:].head()</span>
@@ -12170,10 +12174,12 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;SELECT avg(charges), region FROM bills group by region&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;SELECT avg(charges), region </span>
+<span class="s2">               FROM bills </span>
+<span class="s2">               group by region&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12186,7 +12192,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[20]:</div>
+<div class="prompt output_prompt">Out[7]:</div>
 
 
 
@@ -12255,10 +12261,12 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;SELECT avg(charges), region FROM bills group by region having region = &#39;southwest&#39;&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;SELECT avg(charges), region </span>
+<span class="s2">               FROM bills </span>
+<span class="s2">               group by region having region = &#39;southwest&#39;&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12271,7 +12279,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[22]:</div>
+<div class="prompt output_prompt">Out[8]:</div>
 
 
 
@@ -12325,7 +12333,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;SELECT * from customers c join bills b on c.id = b.id limit 5&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
@@ -12341,7 +12349,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[24]:</div>
+<div class="prompt output_prompt">Out[9]:</div>
 
 
 
@@ -12451,34 +12459,18 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="5)-&quot;Rank()-over&quot;-to-show---surprise---ranking-of-values">5) "Rank() over" to show - surprise - ranking of values<a class="anchor-link" href="#5)-&quot;Rank()-over&quot;-to-show---surprise---ranking-of-values">&#182;</a></h1>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="6)-&quot;Partition-by&quot;-to-show-avg-or-count-to-aggregate-data">6) "Partition by" to show avg or count to aggregate data<a class="anchor-link" href="#6)-&quot;Partition-by&quot;-to-show-avg-or-count-to-aggregate-data">&#182;</a></h1><h2 id="similar-to-group-by-but-all-values-will-be-shown,-not-only-the-groups">similar to group by but all values will be shown, not only the groups<a class="anchor-link" href="#similar-to-group-by-but-all-values-will-be-shown,-not-only-the-groups">&#182;</a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="7)-Percentage:-Share-of-groups">7) Percentage: Share of groups<a class="anchor-link" href="#7)-Percentage:-Share-of-groups">&#182;</a></h1><h2 id="Are-the-regions-represented-evenly?">Are the regions represented evenly?<a class="anchor-link" href="#Are-the-regions-represented-evenly?">&#182;</a></h2>
+<h1 id="5)-&quot;Rank()-over&quot;-to-show---surprise---ranking-of-values">5) "Rank() over" to show - surprise - ranking of values<a class="anchor-link" href="#5)-&quot;Rank()-over&quot;-to-show---surprise---ranking-of-values">&#182;</a></h1><h2 id="creating-a-new-column-&quot;ranking&quot;-based-on-charges-from-high-to-low-(desc)">creating a new column "ranking" based on charges from high to low (desc)<a class="anchor-link" href="#creating-a-new-column-&quot;ranking&quot;-based-on-charges-from-high-to-low-(desc)">&#182;</a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;Select region, (Count(region)* 100 / (Select Count(*) From bills)) as Score</span>
-<span class="s2">From bills</span>
-<span class="s2">Group By region&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;SELECT *, rank() over (order by charges desc)ranking</span>
+<span class="s2">               from bills</span>
+<span class="s2">               limit 5&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12491,7 +12483,607 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[26]:</div>
+<div class="prompt output_prompt">Out[10]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>region</th>
+      <th>charges</th>
+      <th>ranking</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>544</td>
+      <td>southeast</td>
+      <td>63770.42801</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1301</td>
+      <td>southeast</td>
+      <td>62592.87309</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1231</td>
+      <td>northwest</td>
+      <td>60021.39897</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>578</td>
+      <td>northeast</td>
+      <td>58571.07448</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>820</td>
+      <td>northwest</td>
+      <td>55135.40209</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="6)-&quot;Partition-by&quot;-to-show-avg-or-count-to-aggregate-data">6) "Partition by" to show avg or count to aggregate data<a class="anchor-link" href="#6)-&quot;Partition-by&quot;-to-show-avg-or-count-to-aggregate-data">&#182;</a></h1><h2 id="similar-to-group-by-but-all-values-will-be-shown,-not-only-the-groups">similar to group by but all values will be shown, not only the groups<a class="anchor-link" href="#similar-to-group-by-but-all-values-will-be-shown,-not-only-the-groups">&#182;</a></h2><h3 id="we-are-ranking-not-the-whole-dataset,-but-for-every-region-we-create-an-individual-ranking">we are ranking not the whole dataset, but for every region we create an individual ranking<a class="anchor-link" href="#we-are-ranking-not-the-whole-dataset,-but-for-every-region-we-create-an-individual-ranking">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;SELECT *, rank() over (partition by region order by charges desc)ranking</span>
+<span class="s2">               from bills&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[11]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>region</th>
+      <th>charges</th>
+      <th>ranking</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>578</td>
+      <td>northeast</td>
+      <td>58571.07448</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>282</td>
+      <td>northeast</td>
+      <td>48549.17835</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>331</td>
+      <td>northeast</td>
+      <td>48517.56315</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>289</td>
+      <td>northeast</td>
+      <td>47896.79135</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>884</td>
+      <td>northeast</td>
+      <td>46255.11250</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>669</td>
+      <td>northeast</td>
+      <td>45710.20785</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>1097</td>
+      <td>northeast</td>
+      <td>44641.19740</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>186</td>
+      <td>northeast</td>
+      <td>43753.33705</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>743</td>
+      <td>northeast</td>
+      <td>43254.41795</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>382</td>
+      <td>northeast</td>
+      <td>42303.69215</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>853</td>
+      <td>northeast</td>
+      <td>42111.66470</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>339</td>
+      <td>northeast</td>
+      <td>41919.09700</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>255</td>
+      <td>northeast</td>
+      <td>41097.16175</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>959</td>
+      <td>northeast</td>
+      <td>41034.22140</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>1125</td>
+      <td>northeast</td>
+      <td>40904.19950</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>39</td>
+      <td>northeast</td>
+      <td>39774.27630</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>829</td>
+      <td>northeast</td>
+      <td>39597.40720</td>
+      <td>17</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>124</td>
+      <td>northeast</td>
+      <td>39556.49450</td>
+      <td>18</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>423</td>
+      <td>northeast</td>
+      <td>39125.33225</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>948</td>
+      <td>northeast</td>
+      <td>39047.28500</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>241</td>
+      <td>northeast</td>
+      <td>38511.62830</td>
+      <td>21</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>24</td>
+      <td>northeast</td>
+      <td>37701.87680</td>
+      <td>22</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>1250</td>
+      <td>northeast</td>
+      <td>37607.52770</td>
+      <td>23</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>851</td>
+      <td>northeast</td>
+      <td>37270.15120</td>
+      <td>24</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>739</td>
+      <td>northeast</td>
+      <td>36189.10170</td>
+      <td>25</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>477</td>
+      <td>northeast</td>
+      <td>35147.52848</td>
+      <td>26</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>918</td>
+      <td>northeast</td>
+      <td>35069.37452</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>624</td>
+      <td>northeast</td>
+      <td>34617.84065</td>
+      <td>28</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>1268</td>
+      <td>northeast</td>
+      <td>34254.05335</td>
+      <td>29</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>912</td>
+      <td>northeast</td>
+      <td>33732.68670</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1308</th>
+      <td>211</td>
+      <td>southwest</td>
+      <td>1980.07000</td>
+      <td>296</td>
+    </tr>
+    <tr>
+      <th>1309</th>
+      <td>632</td>
+      <td>southwest</td>
+      <td>1977.81500</td>
+      <td>297</td>
+    </tr>
+    <tr>
+      <th>1310</th>
+      <td>1003</td>
+      <td>southwest</td>
+      <td>1972.95000</td>
+      <td>298</td>
+    </tr>
+    <tr>
+      <th>1311</th>
+      <td>453</td>
+      <td>southwest</td>
+      <td>1969.61400</td>
+      <td>299</td>
+    </tr>
+    <tr>
+      <th>1312</th>
+      <td>1296</td>
+      <td>southwest</td>
+      <td>1964.78000</td>
+      <td>300</td>
+    </tr>
+    <tr>
+      <th>1313</th>
+      <td>1269</td>
+      <td>southwest</td>
+      <td>1880.48700</td>
+      <td>301</td>
+    </tr>
+    <tr>
+      <th>1314</th>
+      <td>856</td>
+      <td>southwest</td>
+      <td>1875.34400</td>
+      <td>302</td>
+    </tr>
+    <tr>
+      <th>1315</th>
+      <td>150</td>
+      <td>southwest</td>
+      <td>1842.51900</td>
+      <td>303</td>
+    </tr>
+    <tr>
+      <th>1316</th>
+      <td>16</td>
+      <td>southwest</td>
+      <td>1837.23700</td>
+      <td>304</td>
+    </tr>
+    <tr>
+      <th>1317</th>
+      <td>249</td>
+      <td>southwest</td>
+      <td>1832.09400</td>
+      <td>305</td>
+    </tr>
+    <tr>
+      <th>1318</th>
+      <td>13</td>
+      <td>southwest</td>
+      <td>1826.84300</td>
+      <td>306</td>
+    </tr>
+    <tr>
+      <th>1319</th>
+      <td>974</td>
+      <td>southwest</td>
+      <td>1759.33800</td>
+      <td>307</td>
+    </tr>
+    <tr>
+      <th>1320</th>
+      <td>491</td>
+      <td>southwest</td>
+      <td>1748.77400</td>
+      <td>308</td>
+    </tr>
+    <tr>
+      <th>1321</th>
+      <td>473</td>
+      <td>southwest</td>
+      <td>1744.46500</td>
+      <td>309</td>
+    </tr>
+    <tr>
+      <th>1322</th>
+      <td>66</td>
+      <td>southwest</td>
+      <td>1743.21400</td>
+      <td>310</td>
+    </tr>
+    <tr>
+      <th>1323</th>
+      <td>312</td>
+      <td>southwest</td>
+      <td>1737.37600</td>
+      <td>311</td>
+    </tr>
+    <tr>
+      <th>1324</th>
+      <td>1317</td>
+      <td>southwest</td>
+      <td>1731.67700</td>
+      <td>312</td>
+    </tr>
+    <tr>
+      <th>1325</th>
+      <td>1130</td>
+      <td>southwest</td>
+      <td>1728.89700</td>
+      <td>313</td>
+    </tr>
+    <tr>
+      <th>1326</th>
+      <td>233</td>
+      <td>southwest</td>
+      <td>1727.78500</td>
+      <td>314</td>
+    </tr>
+    <tr>
+      <th>1327</th>
+      <td>889</td>
+      <td>southwest</td>
+      <td>1682.59700</td>
+      <td>315</td>
+    </tr>
+    <tr>
+      <th>1328</th>
+      <td>841</td>
+      <td>southwest</td>
+      <td>1526.31200</td>
+      <td>316</td>
+    </tr>
+    <tr>
+      <th>1329</th>
+      <td>724</td>
+      <td>southwest</td>
+      <td>1263.24900</td>
+      <td>317</td>
+    </tr>
+    <tr>
+      <th>1330</th>
+      <td>386</td>
+      <td>southwest</td>
+      <td>1261.85900</td>
+      <td>318</td>
+    </tr>
+    <tr>
+      <th>1331</th>
+      <td>137</td>
+      <td>southwest</td>
+      <td>1261.44200</td>
+      <td>319</td>
+    </tr>
+    <tr>
+      <th>1332</th>
+      <td>514</td>
+      <td>southwest</td>
+      <td>1256.29900</td>
+      <td>320</td>
+    </tr>
+    <tr>
+      <th>1333</th>
+      <td>488</td>
+      <td>southwest</td>
+      <td>1253.93600</td>
+      <td>321</td>
+    </tr>
+    <tr>
+      <th>1334</th>
+      <td>792</td>
+      <td>southwest</td>
+      <td>1252.40700</td>
+      <td>322</td>
+    </tr>
+    <tr>
+      <th>1335</th>
+      <td>585</td>
+      <td>southwest</td>
+      <td>1242.81600</td>
+      <td>323</td>
+    </tr>
+    <tr>
+      <th>1336</th>
+      <td>682</td>
+      <td>southwest</td>
+      <td>1242.26000</td>
+      <td>324</td>
+    </tr>
+    <tr>
+      <th>1337</th>
+      <td>1252</td>
+      <td>southwest</td>
+      <td>1241.56500</td>
+      <td>325</td>
+    </tr>
+  </tbody>
+</table>
+<p>1338 rows × 4 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="7)-Percentage:-Share-of-groups">7) Percentage: Share of groups<a class="anchor-link" href="#7)-Percentage:-Share-of-groups">&#182;</a></h1><h2 id="Are-the-regions-represented-evenly?">Are the regions represented evenly?<a class="anchor-link" href="#Are-the-regions-represented-evenly?">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;Select region, (Count(region)* 100 / (Select Count(*) From bills)) as Score</span>
+<span class="s2">               From bills</span>
+<span class="s2">               Group By region&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[12]:</div>
 
 
 
@@ -12549,6 +13141,14 @@ div#notebook {
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="8)-What-else?">8) What else?<a class="anchor-link" href="#8)-What-else?">&#182;</a></h1>
+</div>
+</div>
 </div>
     </div>
   </div>
