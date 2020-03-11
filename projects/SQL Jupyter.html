@@ -11775,7 +11775,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Top-10-SQL-queries-with-focus-on-ETL---and-some-analysis">Top 10 SQL queries with focus on ETL - and some analysis<a class="anchor-link" href="#Top-10-SQL-queries-with-focus-on-ETL---and-some-analysis">&#182;</a></h1>
+<h1 id="Top-SQL-queries-with-focus-on-ETL---and-some-analysis">Top SQL queries with focus on ETL - and some analysis<a class="anchor-link" href="#Top-SQL-queries-with-focus-on-ETL---and-some-analysis">&#182;</a></h1>
 </div>
 </div>
 </div>
@@ -11837,7 +11837,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Starting-queries">Starting queries<a class="anchor-link" href="#Starting-queries">&#182;</a></h3><h4 id="Our-data-consists-of-insurance-data,-the-first-table-is-about-the-customer-and-stores-data-like-age-and-bmi,-whereas-the-second-table-stores-region-and-charges.-Both-have-an-id-that-serves-as-key-for-both-tables.">Our data consists of insurance data, the first table is about the customer and stores data like age and bmi, whereas the second table stores region and charges. Both have an id that serves as key for both tables.<a class="anchor-link" href="#Our-data-consists-of-insurance-data,-the-first-table-is-about-the-customer-and-stores-data-like-age-and-bmi,-whereas-the-second-table-stores-region-and-charges.-Both-have-an-id-that-serves-as-key-for-both-tables.">&#182;</a></h4>
+<h1 id="Checking-out-our-data">Checking out our data<a class="anchor-link" href="#Checking-out-our-data">&#182;</a></h1><h4 id="Our-data-consists-of-insurance-data,-the-first-table-is-about-the-customer-and-stores-data-like-age-and-bmi,-whereas-the-second-table-stores-region-and-charges.-Both-have-an-id-that-serves-as-key-for-both-tables.">Our data consists of insurance data, the first table is about the customer and stores data like age and bmi, whereas the second table stores region and charges. Both have an id that serves as key for both tables.<a class="anchor-link" href="#Our-data-consists-of-insurance-data,-the-first-table-is-about-the-customer-and-stores-data-like-age-and-bmi,-whereas-the-second-table-stores-region-and-charges.-Both-have-an-id-that-serves-as-key-for-both-tables.">&#182;</a></h4>
 </div>
 </div>
 </div>
@@ -12039,7 +12039,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="1)-&quot;Where&quot;---clause-to-filter-data">1) "Where" - clause to filter data<a class="anchor-link" href="#1)-&quot;Where&quot;---clause-to-filter-data">&#182;</a></h1><h2 id="Show-only-female-datapoints">Show only female datapoints<a class="anchor-link" href="#Show-only-female-datapoints">&#182;</a></h2>
+<h1 id="SQL-for-ETL-processes">SQL for ETL processes<a class="anchor-link" href="#SQL-for-ETL-processes">&#182;</a></h1><h1 id="1)-&quot;Where&quot;---clause-to-filter-data">1) "Where" - clause to filter data<a class="anchor-link" href="#1)-&quot;Where&quot;---clause-to-filter-data">&#182;</a></h1><h2 id="Show-only-female-datapoints">Show only female datapoints<a class="anchor-link" href="#Show-only-female-datapoints">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -12327,7 +12327,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="4)-join-data-to-combine-multiple-tables-via-unique-identifier-(primary-key)">4) join data to combine multiple tables via unique identifier (primary key)<a class="anchor-link" href="#4)-join-data-to-combine-multiple-tables-via-unique-identifier-(primary-key)">&#182;</a></h1>
+<h1 id="4)-Join-data-to-combine-multiple-tables-via-unique-identifier-(primary-key)">4) Join data to combine multiple tables via unique identifier (primary key)<a class="anchor-link" href="#4)-Join-data-to-combine-multiple-tables-via-unique-identifier-(primary-key)">&#182;</a></h1>
 </div>
 </div>
 </div>
@@ -12336,7 +12336,9 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;SELECT * from customers c join bills b on c.id = b.id limit 5&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;SELECT * </span>
+<span class="s2">               from customers c join bills b on c.id = b.id </span>
+<span class="s2">               limit 5&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12572,7 +12574,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;SELECT *, rank() over (partition by region order by charges desc)ranking</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;SELECT *, rank() over (partition by region order by charges desc)as Ranking</span>
 <span class="s2">               from bills&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
 </pre></div>
 
@@ -12612,7 +12614,7 @@ div#notebook {
       <th>id</th>
       <th>region</th>
       <th>charges</th>
-      <th>ranking</th>
+      <th>Ranking</th>
     </tr>
   </thead>
   <tbody>
@@ -13059,7 +13061,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="7)-Percentage:-Share-of-groups">7) Percentage: Share of groups<a class="anchor-link" href="#7)-Percentage:-Share-of-groups">&#182;</a></h1><h2 id="Are-the-regions-represented-evenly?">Are the regions represented evenly?<a class="anchor-link" href="#Are-the-regions-represented-evenly?">&#182;</a></h2>
+<h1 id="8)-&quot;like&quot;-operator">8) "like" operator<a class="anchor-link" href="#8)-&quot;like&quot;-operator">&#182;</a></h1><h2 id="show-only-regions-that-contain-&quot;north&quot;,-helpful-if-you-have-a-large-database-of-customers-and-you-only-want-to-filter-for-names-starting-with-the-same-letter.-&quot;Like&quot;-operator-functions-with-wildcards-like-&quot;%&quot;-(for-any-amount-of-letters,-digits-etc.)-or-&quot;_&quot;-for-just-a-single-one">show only regions that contain "north", helpful if you have a large database of customers and you only want to filter for names starting with the same letter. "Like" operator functions with wildcards like "%" (for any amount of letters, digits etc.) or "_" for just a single one<a class="anchor-link" href="#show-only-regions-that-contain-&quot;north&quot;,-helpful-if-you-have-a-large-database-of-customers-and-you-only-want-to-filter-for-names-starting-with-the-same-letter.-&quot;Like&quot;-operator-functions-with-wildcards-like-&quot;%&quot;-(for-any-amount-of-letters,-digits-etc.)-or-&quot;_&quot;-for-just-a-single-one">&#182;</a></h2><h3 id="Note:-in-our-case-we-can-also-use-a-&quot;having&quot;-statement-as-we-only-have-two-regions-that-contain-&quot;north&quot;">Note: in our case we can also use a "having" statement as we only have two regions that contain "north"<a class="anchor-link" href="#Note:-in-our-case-we-can-also-use-a-&quot;having&quot;-statement-as-we-only-have-two-regions-that-contain-&quot;north&quot;">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -13068,9 +13070,10 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;Select region, (Count(region)* 100 / (Select Count(*) From bills)) as Score</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;Select region, avg(charges) as total</span>
 <span class="s2">               From bills</span>
-<span class="s2">               Group By region&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
+<span class="s2">               Group By region</span>
+<span class="s2">               Having region like &quot;north%&quot; &quot;&quot;&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -13107,7 +13110,162 @@ div#notebook {
     <tr style="text-align: right;">
       <th></th>
       <th>region</th>
-      <th>Score</th>
+      <th>total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>northeast</td>
+      <td>13406.384516</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>northwest</td>
+      <td>12417.575374</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;Select region, avg(charges) as total</span>
+<span class="s2">               From bills</span>
+<span class="s2">               Group By region</span>
+<span class="s2">               Having region = &quot;northeast&quot; or region = &quot;northwest&quot;  &quot;&quot;&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[13]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>region</th>
+      <th>total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>northeast</td>
+      <td>13406.384516</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>northwest</td>
+      <td>12417.575374</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="SQL-for-Analysis">SQL for Analysis<a class="anchor-link" href="#SQL-for-Analysis">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="8)-Percentage:-Share-of-groups">8) Percentage: Share of groups<a class="anchor-link" href="#8)-Percentage:-Share-of-groups">&#182;</a></h1><h2 id="Are-the-regions-represented-evenly,-i.e.-do-we-have-same-amount-of-datapoints-for-every-region?">Are the regions represented evenly, i.e. do we have same amount of datapoints for every region?<a class="anchor-link" href="#Are-the-regions-represented-evenly,-i.e.-do-we-have-same-amount-of-datapoints-for-every-region?">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;Select region, (Count(region)*100/ (Select Count(*) From bills))as Share</span>
+<span class="s2">               From bills</span>
+<span class="s2">               Group By region&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[14]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>region</th>
+      <th>Share</th>
     </tr>
   </thead>
   <tbody>
@@ -13146,9 +13304,93 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="8)-What-else?">8) What else?<a class="anchor-link" href="#8)-What-else?">&#182;</a></h1>
+<h1 id="9)-Percentage:-Share-of-groups--">9) Percentage: Share of groups -<a class="anchor-link" href="#9)-Percentage:-Share-of-groups--">&#182;</a></h1><h2 id="How-much-does-any-region-contribute-to-the-total-charges?">How much does any region contribute to the total charges?<a class="anchor-link" href="#How-much-does-any-region-contribute-to-the-total-charges?">&#182;</a></h2>
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;Select region, sum(charges), (Sum(charges)/ (Select sum(charges) From bills)) as Share</span>
+<span class="s2">               From bills</span>
+<span class="s2">               Group By region&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[15]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>region</th>
+      <th>sum(charges)</th>
+      <th>Share</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>northeast</td>
+      <td>4.343669e+06</td>
+      <td>0.244633</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>northwest</td>
+      <td>4.035712e+06</td>
+      <td>0.227289</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>southeast</td>
+      <td>5.363690e+06</td>
+      <td>0.302081</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>southwest</td>
+      <td>4.012755e+06</td>
+      <td>0.225997</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
     </div>
   </div>
