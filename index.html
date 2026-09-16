@@ -1,443 +1,578 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en">
-
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>My Portfolio</title>
-	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-	<link rel="icon" href="favicon.ico" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
-    <link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/styles.css" rel="stylesheet">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Phil Scherbel — Data Scientist</title>
+<meta name="description" content="Portfolio of Phil Scherbel, data scientist in NYC. Experience, education, and data science projects.">
+<meta name="theme-color" content="#F8F8F5">
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+  :root{
+    --bg: #F8F8F5;
+    --bg-alt: #EFEEE6;
+    --ink: #1C1D1B;
+    --ink-soft: #5B5C54;
+    --ink-faint: #90917F;
+    --accent: #2B5D63;
+    --accent-strong: #1E4448;
+    --accent-soft: #DCE7E6;
+    --rule: #DDDBCD;
+    --serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+    --sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    --mono: 'IBM Plex Mono', 'SFMono-Regular', Menlo, Consolas, monospace;
+    --max-wide: 980px;
+    --max-text: 640px;
+    --radius: 3px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;scroll-padding-top:76px;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-size:17px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;}
+  ul{margin:0;padding:0;list-style:none;}
+  p{margin:0 0 1em;}
+  p:last-child{margin-bottom:0;}
+  h1,h2,h3{font-family:var(--serif);font-weight:600;color:var(--ink);line-height:1.2;margin:0;}
+
+  .skip-link{
+    position:absolute;left:-999px;top:auto;
+    background:var(--ink);color:var(--bg);padding:10px 16px;z-index:200;
+  }
+  .skip-link:focus{left:12px;top:12px;}
+
+  /* Header */
+  .site-header{
+    position:sticky;top:0;z-index:100;
+    background:rgba(248,248,245,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--rule);
+  }
+  .header-inner{
+    max-width:var(--max-wide);margin:0 auto;padding:0 24px;
+    height:64px;display:flex;align-items:center;justify-content:space-between;
+  }
+  .wordmark{font-family:var(--serif);font-size:1.05rem;font-weight:600;text-decoration:none;}
+  #site-nav{display:flex;gap:28px;}
+  #site-nav a{
+    font-size:0.95rem;text-decoration:none;color:var(--ink-soft);
+    border-bottom:1px solid transparent;padding:4px 1px;transition:color .15s, border-color .15s;
+  }
+  #site-nav a:hover,#site-nav a:focus-visible{color:var(--ink);border-bottom-color:var(--accent);}
+  #nav-toggle{
+    display:none;background:none;border:none;cursor:pointer;padding:8px;color:var(--ink);
+  }
+  #nav-toggle svg{width:22px;height:22px;display:block;}
+
+  @media (max-width:700px){
+    #site-nav{
+      position:absolute;top:64px;left:0;right:0;
+      background:var(--bg);border-bottom:1px solid var(--rule);
+      flex-direction:column;gap:0;
+      max-height:0;overflow:hidden;
+      transition:max-height .25s ease;
+    }
+    #site-nav.open{max-height:320px;}
+    #site-nav a{padding:14px 24px;border-bottom:1px solid var(--rule);}
+    #nav-toggle{display:block;}
+  }
+
+  /* Hero */
+  .hero{
+    min-height:78vh;display:flex;align-items:center;
+    padding:96px 24px 64px;
+  }
+  .hero-inner{max-width:var(--max-wide);margin:0 auto;width:100%;}
+  .hero-inner h1{font-size:clamp(2.6rem,6vw,4.4rem);}
+  .hero-role{
+    font-family:var(--sans);font-size:1.15rem;color:var(--ink-soft);
+    margin-top:14px;
+  }
+  .hero-tag{
+    font-family:var(--sans);font-size:1.05rem;color:var(--ink-soft);
+    max-width:44ch;margin-top:8px;
+  }
+  .hero-line{width:100%;max-width:460px;height:auto;margin-top:40px;opacity:0.55;}
+  .hero-line path{
+    fill:none;stroke:var(--accent);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
+  }
+  @media (prefers-reduced-motion: no-preference){
+    .hero-line path{
+      stroke-dasharray:1;stroke-dashoffset:1;
+      animation:draw-line 1.6s ease-out .2s forwards;
+    }
+  }
+  @keyframes draw-line{to{stroke-dashoffset:0;}}
+
+  /* Sections */
+  .section{padding:88px 24px;}
+  .section-alt{background:var(--bg-alt);}
+  .section-inner{max-width:var(--max-wide);margin:0 auto;}
+  .section h2{font-size:clamp(1.55rem,3vw,2rem);margin-bottom:40px;}
+  .section h2::before{
+    content:"";display:inline-block;width:26px;height:2px;background:var(--accent);
+    margin-right:14px;vertical-align:middle;transform:translateY(-4px);
+  }
+
+  /* About */
+  .about-grid{display:grid;grid-template-columns:220px 1fr;gap:56px;align-items:start;}
+  .about-portrait img{border-radius:var(--radius);width:100%;}
+  .about-copy p{max-width:66ch;color:var(--ink);}
+  @media (max-width:700px){
+    .about-grid{grid-template-columns:1fr;}
+    .about-portrait{max-width:200px;}
+  }
+
+  /* Stack items (experience + education share this) */
+  .stack-item{
+    display:grid;grid-template-columns:140px 1fr;gap:32px;
+    padding:28px 0;border-top:1px solid var(--rule);position:relative;
+  }
+  .stack-item:first-child{border-top:none;padding-top:0;}
+  .stack-date{
+    font-family:var(--mono);font-size:0.82rem;color:var(--ink-soft);
+    letter-spacing:0.01em;padding-top:4px;
+  }
+  .stack-item h3{font-size:1.2rem;margin-bottom:2px;}
+  .stack-role{
+    font-family:var(--sans);font-weight:500;font-size:0.95rem;
+    color:var(--accent-strong);margin-bottom:10px;
+  }
+  .stack-item p:not(.stack-role){max-width:60ch;color:var(--ink);font-size:0.98rem;}
+  .stack-item ul{margin:10px 0 10px 1.1em;list-style:disc;}
+  .stack-item li{margin-bottom:4px;color:var(--ink);font-size:0.98rem;}
+
+  #experience .timeline{position:relative;}
+  @media (min-width:701px){
+    #experience .timeline::before{
+      content:"";position:absolute;left:156px;top:6px;bottom:6px;width:1px;background:var(--rule);
+    }
+    #experience .stack-item::before{
+      content:"";position:absolute;left:152px;top:34px;width:9px;height:9px;
+      border-radius:50%;background:var(--accent);border:2px solid var(--bg-alt);
+    }
+    #experience .stack-item:first-child::before{top:6px;}
+  }
+  @media (max-width:700px){
+    .stack-item{grid-template-columns:1fr;gap:6px;}
+    .stack-date{padding-top:0;}
+  }
+
+  /* Projects */
+  .project-list{display:flex;flex-direction:column;gap:64px;}
+  .project.has-image{
+    display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;
+  }
+  .project:nth-of-type(even).has-image .project-media{order:2;}
+  .project:nth-of-type(even).has-image .project-copy{order:1;}
+  .project-media img{border-radius:var(--radius);border:1px solid var(--rule);}
+  .project-copy h3{font-size:1.25rem;margin-bottom:10px;}
+  .project-copy p{color:var(--ink);max-width:52ch;}
+  .project.text-only{
+    max-width:640px;border-left:3px solid var(--accent);padding-left:28px;
+  }
+  .project.text-only h3{font-size:1.25rem;margin-bottom:10px;}
+  .project a{
+    display:inline-block;margin-top:12px;font-size:0.95rem;font-weight:500;
+    color:var(--accent-strong);text-decoration:none;border-bottom:1px solid var(--accent);
+  }
+  .project a:hover,.project a:focus-visible{color:var(--accent);}
+  .project a + a{margin-left:0;}
+  .tableau-links a{display:block;margin-top:10px;}
+  @media (max-width:700px){
+    .project.has-image{grid-template-columns:1fr;}
+    .project:nth-of-type(even).has-image .project-media,
+    .project:nth-of-type(even).has-image .project-copy{order:initial;}
+  }
+
+  /* Skills */
+  .skills-groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:40px;}
+  .skills-group h3{
+    font-family:var(--sans);font-size:0.9rem;font-weight:600;color:var(--ink-soft);
+    margin-bottom:14px;
+  }
+  .tag-list{display:flex;flex-wrap:wrap;gap:8px;}
+  .tag-list li{
+    font-size:0.85rem;padding:6px 12px;border-radius:var(--radius);
+    border:1px solid var(--rule);color:var(--ink-soft);
+  }
+  .tag-list li.primary{
+    background:var(--accent-soft);border-color:var(--accent-soft);
+    color:var(--accent-strong);font-weight:500;
+  }
+
+  /* Contact */
+  .contact-inner{max-width:var(--max-text);}
+  .contact-inner p{color:var(--ink-soft);margin-bottom:32px;}
+  #contact-form label{
+    position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);
+  }
+  #contact-form input,#contact-form textarea{
+    width:100%;background:transparent;border:none;border-bottom:1px solid var(--rule);
+    padding:12px 2px;font-family:var(--sans);font-size:1rem;color:var(--ink);
+    margin-bottom:24px;transition:border-color .15s;
+  }
+  #contact-form input:focus,#contact-form textarea:focus{
+    outline:none;border-bottom-color:var(--accent);
+  }
+  #contact-form textarea{resize:vertical;min-height:100px;}
+  #contact-form button{
+    background:var(--ink);color:var(--bg);border:none;border-radius:var(--radius);
+    padding:12px 30px;font-family:var(--sans);font-size:0.98rem;font-weight:600;
+    cursor:pointer;transition:background .15s;
+  }
+  #contact-form button:hover,#contact-form button:focus-visible{background:var(--accent);}
+
+  /* Footer */
+  .site-footer{padding:40px 24px;}
+  .footer-inner{
+    max-width:var(--max-wide);margin:0 auto;display:flex;
+    align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;
+  }
+  .footer-inner p{color:var(--ink-faint);font-size:0.9rem;}
+  .social-links{display:flex;gap:18px;}
+  .social-links a{color:var(--ink-soft);transition:color .15s;}
+  .social-links a:hover,.social-links a:focus-visible{color:var(--accent);}
+  .social-links svg{width:20px;height:20px;}
+
+  a:focus-visible, button:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+
+</style>
 </head>
-
 <body>
-    <div id="mobile-menu-open" class="shadow-large">
-        <i class="fa fa-bars" aria-hidden="true"></i>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="wordmark" href="#top">Phil Scherbel</a>
+    <button id="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+    </button>
+    <nav id="site-nav">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section id="top" class="hero">
+    <div class="hero-inner">
+      <h1>Phil Scherbel</h1>
+      <p class="hero-role">Data scientist, NYC</p>
+      <p class="hero-tag">Working at the intersection of business, data, and technology.</p>
+      <svg class="hero-line" viewBox="0 0 400 100" preserveAspectRatio="none" aria-hidden="true">
+        <path pathLength="1" d="M0,82 L45,64 L90,74 L135,40 L180,52 L225,24 L270,38 L315,16 L360,30 L400,10"></path>
+      </svg>
     </div>
-    <!-- End #mobile-menu-toggle -->
-    <header>
-        <div id="mobile-menu-close">
-            <span>Close</span> <i class="fa fa-times" aria-hidden="true"></i>
-        </div>
-        <ul id="menu" class="shadow">
-            <li>
-                <a href="#about">About</a>
-            </li>
-            <li>
-                <a href="#experience">Experience</a>
-            </li>
-            <li>
-                <a href="#education">Education</a>
-            </li>
-            <li>
-                <a href="#projects">Projects</a>
-            </li>
-            <li>
-                <a href="#skills">Skills</a>
-            </li>
-            <li>
-                <a href="#contact">Contact</a>
-            </li>
-        </ul>
-    </header>
-    <!-- End header -->
+  </section>
 
-    <div id="lead">
-        <div id="lead-content">
-            <h1>Phil Scherbel</h1>
-            <h2>Data Scientist</h2>
-        </div>
-        <!-- End #lead-content -->
-
-        <div id="lead-overlay"></div>
-
-        <div id="lead-down">
-            <span>
-                <i class="fa fa-chevron-down" aria-hidden="true"></i>
-            </span>
-        </div>
-        <!-- End #lead-down -->
+  <section id="about" class="section">
+    <div class="section-inner about-grid">
+      <div class="about-portrait">
+        <img src="images/me.jpg" alt="Phil Scherbel" width="300" height="300" loading="lazy">
+      </div>
+      <div class="about-copy">
+        <h2>About</h2>
+        <p>Hi there and welcome. I started building this page to showcase projects I'd like to share — and also to learn some HTML. I try to explain my projects and the steps I take in detail, since I know how confusing it can be to look at random code snippets without any description.</p>
+        <p>It's been quite a journey for me, transitioning from a supply chain / business intelligence background into data science and analytics, so I hope this is helpful for other aspiring data scientists and analysts too. I work at the intersection of business, data, and technology: my business analytics program gave me the stats and coding skills that I've enhanced with business knowledge to solve complex business problems. Understanding the business problem is often the most challenging part, but it's crucial before starting any analysis — only with a clear goal in mind can analytics turn into insight, and insight into impact on strategy and operations.</p>
+        <p>Currently, I work as a data scientist in NYC after a longer stint in the Bay Area. I really enjoyed spending a lot of time outdoors exploring the city and nature out there — but weekly hiking has since changed to comedy clubs and Broadway shows. Still on the hunt for a local DS and tech community as tight-knit as the one I found in the Bay!</p>
+        <p>Cheers,<br>Phil</p>
+      </div>
     </div>
-    <!-- End #lead -->
+  </section>
 
-    <div id="about">
-        <div class="row">
-            
-                <div class="col-md-2">
-                    <h2 class="heading">About Me</h2>
-                    <br><br>
-                    <br><br>
+  <section id="experience" class="section section-alt">
+    <div class="section-inner">
+      <h2>Experience</h2>
+      <ol class="timeline">
 
-                <img src="images/me.jpg" alt="Flowers in Chania" width="300" height="300">
-                </div>
-        <div class="col-md-1">
-        </div>
-            <div class="col-md-6", align = "justify">
-                    <br><br>
-                    <p>
-                        Hi there and welcome, 
-                        <br/>I started building this page to showcase projects I would like to share - and also to learn some html ;) . I am trying to explain my projects and steps I take in detail as I know how confusing it is to look at some (random) code snippets without description.<br><br>
-                        It has been quite a journey for me transitioning from a supply chain/ business intelligence background to data science and analytics, so I hope this may be helpful for other aspiring data scientists and data analysts as well.
-                        I personally work at the intersection of business, data and technology. During my business analytics program I gained stats and coding skills that I enhanced with my business knowledge to solve complex business problems. Understanding the business (problem) is oftentimes very challenging but crucial in order to start the analysis part. Only when having a clear goal in mind, analytics can be turned into insights and impact strategy as well as operations. 
-                        <br><br>Currently, I work as data scientist in NYC after a longer stint in the bay area. I know, very #basic move, pandy wasn't easy on SF. I really enjoyed spending a lot of time outdoors exploring city and nature (which makes me probably even more #basic and granola). But now weekly hiking changed to comedy clubs and broadway shows. Trying to find a local DS and tech community - which was unparalleled back in the bay! 
+        <li class="stack-item">
+          <div class="stack-date">Dec 2021 —<br>current</div>
+          <div>
+            <h3>Meta</h3>
+            <p class="stack-role">Data Scientist, Research and Product</p>
+            <p>I've worked across different teams and a wide range of topics and products. Initially in AI infrastructure, I developed metrics in feature engineering for trunk health and privacy requirements. Later, as a product data scientist, I worked on Facebook's video teams, analyzing creator incentives and user preferences around video, along with some PREQ work. I enjoyed the more technical work and switched to the calling org supporting quality initiatives, where I now help improve bandwidth estimation models, sharpen user targeting for new feature rollouts, and build out measurement in the space.</p>
+          </div>
+        </li>
 
-                        Cheers, 
-                        Phil 
-                    </p>
-            </div>
-        </div>
-        
+        <li class="stack-item">
+          <div class="stack-date">Jul 2019 —<br>Dec 2021</div>
+          <div>
+            <h3>EY</h3>
+            <p class="stack-role">AI and Data Scientist, Technology Consulting</p>
+            <p>As a data science consultant, I conducted research comparing tools across big data and advanced analytics. On my last engagement, I supported a client in customer analytics — performing cross-shopping analysis and developing cohort analysis across 10k+ cohorts using Hive and Databricks. I also helped the client set up k-means clustering for products, paired with a random forest to predict cluster names for future runs.</p>
+          </div>
+        </li>
+
+        <li class="stack-item">
+          <div class="stack-date">Jul 2017 —<br>Mar 2018</div>
+          <div>
+            <h3>Mercedes-Benz</h3>
+            <p class="stack-role">Business Intelligence Analyst, Customer Services</p>
+            <p>I led a logistics project to improve forecast accuracy, reduce cost, and increase parts availability for 400+ dealerships in the US. I analyzed 100,000+ purchase orders for errors, tracked patterns, and systematically resolved individual defect orders. The deliverables included sustainable fixes for the ERP system and KPIs to continuously monitor data quality, plus a data-quality enhancement process mature enough to be rolled out to other markets. I used these findings, and further research, for my master's thesis, "Data Integrity in Supply Chain Management."</p>
+          </div>
+        </li>
+
+        <li class="stack-item">
+          <div class="stack-date">May 2017 —<br>Jul 2017</div>
+          <div>
+            <h3>Capgemini Consulting</h3>
+            <p class="stack-role">Strategy and Management Consulting Intern, Energy and Utilities Division</p>
+          </div>
+        </li>
+
+        <li class="stack-item">
+          <div class="stack-date">Oct 2016 —<br>Dec 2016</div>
+          <div>
+            <h3>KPMG</h3>
+            <p class="stack-role">Advisory Intern, Technology Enablement</p>
+          </div>
+        </li>
+
+        <li class="stack-item">
+          <div class="stack-date">Feb 2016 —<br>Sep 2016</div>
+          <div>
+            <h3>Mercedes-Benz</h3>
+            <p class="stack-role">Business Intelligence Analyst, Customer Services</p>
+          </div>
+        </li>
+
+      </ol>
     </div>
-    <!-- End #about -->
+  </section>
 
-    <div id="experience" class="background-alt">
-        <div class="row">
-                <div class="col-md-2">
-                    <h2 class="heading">Experience</h2>
-                    <br><br>
-                    <br><br>
+  <section id="education" class="section">
+    <div class="section-inner">
+      <h2>Education</h2>
+      <div class="edu-list">
 
-                    <img src="images/corp.jpg" alt="Flowers" width="450" height="450" >  <!-- style="transform:rotate(90deg);" -->
-                </div>
-    <div class="col-md-8">  
-    <div id="experience-timeline">
-
-
-            <div data-date="December 2021 - current", align = "justify">
-                <h3>Meta</h3>
-                <h4>Data Scientist, Research and Product</h4>
-                <p>
-                    I've worked in different teams and across a wide range of topics and products. Initially in AI infrastructure, I developed metrics in the area of feature engineering for trunk health and privacy requirements. Later on, as product data scientist I worked on Facebook video teams analyzing creator incentives, user preferences regarding videos and some PREQ. I enjoyed the more technical work and switched to the calling org, supporting quality initiatives. Here I am helping to improve our bandwidth estimation models, better user targeting when rolling out new features and measurement in the space.  
-                </p>
-            </div>
-
-            <div data-date="July 2019 – December 2021", align = "justify">
-                <h3>EY</h3>
-                <h4>AI and Data Scientist, Technology Consulting</h4>
-                <p>
-                    As a data science consultant I conducted research in the area of big data and advanced analytics to compare various tools. During my last engagement, I was supporting a client in the area of customer analytics, performing cross-shopping analysis and developed cohort analysis including 10k+ cohorts using hive and databricks. Finally, I helped the client set up k-means clustering for products with a random forest to predict cluster names for future runs.
-                </p>
-            </div>
-
-            <div data-date="July 2017 – Mar 2018", align = "justify">
-                <h3>Mercedes-Benz</h3>
-                <h4>Business Intelligence Analyst, Customer Services</h4>
-                <p>
-                    I led a logistics project to improve forecast accuracy, reduce cost, and increase parts availability for 400+ dealerships in the US. In the course of the project I analyzed 100,000+ purchase orders for errors, tracked patterns, and systematically resolved individual defect orders. The deliverables included sustainable solutions for the ERP system and KPIs to continously monitor data quality. In addition, a data quality enhancement process was established and the solutions were considered appropriate and mature enough to be rolled out to other markets. I also used these findings and further research for my master's thesis "Data Integrity in Supply Chain Management". 
-                </p>
-            </div>
-
-            <div data-date="May 2017 – July 2017">
-                <h3>Capgemini Consulting</h3>
-                <h4>Strategy and Management Consulting Intern, Energy and Utilities Division</h4>
-            </div>
-
-            <div data-date="Oct 2016 – Dec 2016">
-                <h3>KPMG</h3>
-                <h4>Advisory Intern, Technology Enablement</h4>
-            </div>
-
-            <div data-date="Feb 2016 – Sep 2016">
-                <h3>Mercedes-Benz</h3>
-                <h4>Business Intelligence Analyst, Customer Services</h4>
-            </div>
-    
-    </div>
-    </div>
-        </div>
-    
-    <!-- End #experience -->
-    </div>
-
-    <div id="education">
-        <div class="row">
-                <div class="col-md-2">
-                    <h2 class="heading">Education</h2>
-                    <br><br>
-                    <img src="images/lib.jpg" alt="Flowers in Chania" width="450" height="450">
-                </div>
-    <div class="col-md-8">
-    <div id="education">    
-        <div class="education-block">
+        <div class="stack-item">
+          <div class="stack-date">Jul 2018 —<br>May 2019</div>
+          <div>
             <h3>Emory University</h3>
-            <span class="education-date">July 2018 - May 2019</span>
-            <h4>Master of Science in Business Analytics</h4>
+            <p class="stack-role">Master of Science in Business Analytics</p>
+            <p>A very technical program taught in the business school, combining business, data, and technology. Topics covered included:</p>
             <ul>
-                <p>
-                    A very technical program taught in the business school combining business, data, and technology. The topics covered are:
-                </p>
-            <ul>
-                <li>    machine learning</li>
-                <li>    data visualization</li>
-                <li>    business analytics</li>
-                <li>    managing big data</li>
-                <li>    social network analytics, and more</li>
+              <li>Machine learning</li>
+              <li>Data visualization</li>
+              <li>Business analytics</li>
+              <li>Managing big data</li>
+              <li>Social network analytics, and more</li>
             </ul>
-                <p>
-                    The program is very applied which helped me gain coding and statistics as well as further technical skills, for example in the area of distributed computing.
-                </p>
-            <ul/>
+            <p>The program was very applied, which helped me gain coding and statistics skills as well as further technical depth, for example in distributed computing.</p>
+          </div>
         </div>
-        <!-- End .education-block -->
 
-        <div class="education-block">
+        <div class="stack-item">
+          <div class="stack-date">Apr 2014 —<br>May 2018</div>
+          <div>
             <h3>Karlsruhe Institute of Technology</h3>
-            <span class="education-date">April 2014 - May 2018</span>
-            <h4>Master of Science in Industrial Engineering and Management</h4>
-            <ul>
-                <p>
-                    An advanced program, building on the bachelors degree, covering also Business Administration, Engineering Sciences, and in addition Informatics and Operations Research. 
-                </p>
-            </ul>
+            <p class="stack-role">Master of Science in Industrial Engineering and Management</p>
+            <p>An advanced program building on the bachelor's degree, covering Business Administration and Engineering Sciences alongside Informatics and Operations Research.</p>
+          </div>
         </div>
-        <!-- End .education-block -->
 
-        <div class="education-block">
+        <div class="stack-item">
+          <div class="stack-date">Sep 2015 —<br>Dec 2015</div>
+          <div>
             <h3>UC Davis</h3>
-            <span class="education-date">Sep 2015 - Dec 2015</span>
-            <h4>Global Study Program</h4>
-            <ul>
-                <p>
-                    A special program for international students with free access to all courses on campus. I attended courses in the area of public speaking, international microeconomics and operations research.
-                </p>
-            </ul>
+            <p class="stack-role">Global Study Program</p>
+            <p>A special program for international students with free access to all courses on campus. I attended courses in public speaking, international microeconomics, and operations research.</p>
+          </div>
         </div>
-        <!-- End .education-block -->
 
-        </div>
+      </div>
     </div>
-        <!-- End .education-block -->
+  </section>
+
+  <section id="projects" class="section section-alt">
+    <div class="section-inner">
+      <h2>Projects</h2>
+      <div class="project-list">
+
+        <article class="project has-image">
+          <div class="project-media">
+            <img src="images/screen.jpg" alt="Screenshot from the skin screening image-processing project" loading="lazy">
+          </div>
+          <div class="project-copy">
+            <h3>Skin Screening: Image Processing</h3>
+            <p>This project is about image processing: resizing images, converting to greyscale, and creating a machine-readable dataframe to run predictions on. More to come here.</p>
+            <a href="https://medium.com/@philsanfran7/introduction-to-image-processing-5ede0ea6186a">View the Medium article</a>
+          </div>
+        </article>
+
+        <article class="project has-image">
+          <div class="project-media">
+            <img src="images/house.jpg" alt="Chart from the house price prediction project" loading="lazy">
+          </div>
+          <div class="project-copy">
+            <h3>Predicting House Prices</h3>
+            <p>The database contains house prices and features like size, number of bed/baths, and whether there's a fireplace. The R Markdown walks through data exploration, cleaning, and transformation, through to developing several models.</p>
+            <a href="http://htmlpreview.github.io/?https://github.com/DataSciencePhil/HousePrices/blob/master/houseprices.html">View R HTML file</a>
+          </div>
+        </article>
+
+        <article class="project text-only">
+          <h3>Top 10 SQL Queries</h3>
+          <p>I'm not trying to end the careers of every SQL tutorial out there, but: I don't think SQL is usually meant as an analysis or data science tool, more of an ETL tool. Further analysis happens through tools like R or Python — so the focus here is mainly on loading the right data in the right format.</p>
+          <a href="https://htmlpreview.github.io/?https://github.com/DSPhil/SQL/blob/master/SQL%20Jupyter.html">View Jupyter HTML file</a>
+        </article>
+
+        <article class="project text-only">
+          <h3>R Function for Quick Data Exploration</h3>
+          <p>A handy function for initial data exploration — checking the number of unique values per column, and the share of NAs and zeros. This helps determine whether a column is useful and actually contains enough valid information for model building.</p>
+          <a href="https://htmlpreview.github.io/?https://github.com/DSPhil/Data-Exploration-Function/blob/master/explorefunction.html">View R HTML file</a>
+        </article>
+
+        <article class="project text-only tableau-links">
+          <h3>Tableau Dashboards</h3>
+          <p>Some of the visualizations and dashboards I created during my master's program.</p>
+          <a href="https://public.tableau.com/views/CollegeGrads/Dashboard1?:embed=y&amp;:display_count=yes&amp;:origin=viz_share_link">Salaries of College Grads — what matters most?</a>
+          <a href="https://public.tableau.com/profile/phil#!/vizhome/HW4FIFAdashboard/Dashboard12">FIFA 19 Dashboard — comparison and recommendation</a>
+          <a href="https://public.tableau.com/views/HW3_15656449331110/Dashboard12?:language=en-US&amp;:display_count=n&amp;:origin=viz_share_link">Population, pollution, and energy consumption</a>
+        </article>
+
+        <article class="project has-image">
+          <div class="project-media">
+            <img src="images/sf.jpg" alt="Visualization from the company reviews NLP project" loading="lazy">
+          </div>
+          <div class="project-copy">
+            <h3>Analyzing Company Reviews with NLP</h3>
+            <p>We look at reviews of popular tech companies and try to predict the company based on the review text. Eventually this could work as a recommender — letting a model predict which company you should apply to.</p>
+            <a href="http://htmlpreview.github.io/?https://github.com/DataSciencePhil/CompanyReviews/blob/master/Predicting%20Companies%20based%20on%20Employee%20Reviews.html">View Jupyter HTML file</a>
+          </div>
+        </article>
+
+      </div>
     </div>
-    <!-- End #education -->
+  </section>
 
-    <div id="projects" class="background-alt">
-                <div class="col-md-2">
-                    <h2 class="heading">Projects</h2>
-                </div>
-   
-        <div class="container">
-            <div class="row">
+  <section id="skills" class="section">
+    <div class="section-inner">
+      <h2>Skills</h2>
+      <div class="skills-groups">
 
-
-                <div class="project shadow-large">
-                    <div class="project-image-right">
-                        <img src="images/screen.jpg" />
-                    </div>
-                    <!-- End .project-image -->
-                    <div class="project-info-left">
-                        <h3>Skin Screening: Image processing</h3>
-                        <p>
-                            This project is about image processing: resizing images, converting to greyscale and then creating a machine readable dataframe to run predictions! More to come here...
-                        </p>
-                        <a href="https://medium.com/@philsanfran7/introduction-to-image-processing-5ede0ea6186a">View the medium article</a>
-                    </div>
-                    <!-- End .project-info -->
-                </div>
-            
-                <div class="project shadow">
-                    <div class="project-image">
-                        <img src="images/house.jpg" />
-                    </div>
-                    <!-- End .project-image -->
-                    <div class="project-info">
-                        <h3>Predicting House Prices</h3>
-                        <p>
-                            Our database contains house prices and features like size, # of bed/baths, and if there is a fireplace. The rmd shows the steps from data exploration, cleaning (!!!) and transformation to developing different models!
-                        </p>
-                        <a href="http://htmlpreview.github.io/?https://github.com/DataSciencePhil/HousePrices/blob/master/houseprices.html">View R HTML file</a>
-                    </div>
-                    <!-- End .project-info -->
-                </div>
-                <!-- End </div>-->
-
-                <div class="project shadow">
-                    <div class="project no-image">
-                        <div class="project-info">
-                        <h3>Top 10 SQL queries!</h3>
-                        <p>
-                            I am not trying to end the careers of all the SQL tutorials out there...., but: I don't think SQL is usually intended as analysis or even data science tool, but rather as ETL tool. All further analysis will be performed through tools like R or Python. Hence, the focus should mainly be on loading the right data in a good format!
-                        </p>
-                        <a href="https://htmlpreview.github.io/?https://github.com/DSPhil/SQL/blob/master/SQL%20Jupyter.html">View Jupyter HTML file</a>
-                        </div>
-                    </div>
-                    <!-- End .project-info -->
-                </div>
-
-                     <div class="project shadow">
-                    <div class="project no-image">
-                        <div class="project-info">
-                        <h3>R function for quick data exploration</h3>
-                        <p>
-                            Handy function for initial data exploration to check # of unique values of each column, share of NAs and 0s. This helps to determine if columns are useful and actually contain enough valid information for model building!
-                        </p>
-                        <a href="https://htmlpreview.github.io/?https://github.com/DSPhil/Data-Exploration-Function/blob/master/explorefunction.html">View R HTML file</a>
-                        </div>
-                    </div>
-                    <!-- End .project-info -->
-                </div>
-
-                <div class="project shadow">
-                    <div class="project no-image">
-                        <div class="project-info">
-                        <h3>Tableau Dashboards</h3>
-                        <p>
-                            Some of the visualizations and dashboards I created during my master's program!
-                        </p>
-                        <a href="https://public.tableau.com/views/CollegeGrads/Dashboard1?:embed=y&:display_count=yes&:origin=viz_share_link">Salaries of College Grads - what matters most?</a>
-                        <br><br>
-                        <a href="https://public.tableau.com/profile/phil#!/vizhome/HW4FIFAdashboard/Dashboard12">FIFA 19 Dashboard - Comparison and Recommendation</a>
-                        <br><br>
-                        <a href="https://public.tableau.com/views/HW3_15656449331110/Dashboard12?:language=en-US&:display_count=n&:origin=viz_share_link">Population, pollution and energy comsumption</a>
-                        </div>
-                    </div>
-                    <!-- End .project-info -->
-                </div>
-
-
-                <div class="project shadow-large">
-                    <div class="project-image-right">
-                        <img src="images/sf.jpg" />
-                    </div>
-                    <!-- End .project-image -->
-                    <div class="project-info-left">
-                        <h3>Analyzing Company Reviews with NLP</h3>
-                        <p>
-                            We look at reviews of popular tech companies and try to predict the company based on the review. Eventually, this can be used as recommender and we let a ml model predict, what company we should apply for!
-                        </p>
-                        <a href="http://htmlpreview.github.io/?https://github.com/DataSciencePhil/CompanyReviews/blob/master/Predicting%20Companies%20based%20on%20Employee%20Reviews.html">View Jupyter HTML file</a>
-                    </div>
-                    <!-- End .project-info -->
-                </div>
-
-</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- End #projects -->
-
-    <div id="skills">
-        <h2 class="heading">Data science tools and methods</h2>
-        <!-- <div class="col-md-2">
-                    <h2 class="heading">Skills</h2>
-                   <p><small>During my studies as well as experience I got to know different tools and techniques. As data scientist I realized statistics is as important as coding skills - if not more important.</small></p>
-        </div>-->
-        
-        <ul>
-            <li><b>R</b></li>
-            <li><b>Python</b></li>
+        <div class="skills-group">
+          <h3>Languages &amp; tools</h3>
+          <ul class="tag-list">
+            <li class="primary">R</li>
+            <li class="primary">Python</li>
+            <li class="primary">SQL</li>
             <li>Hive</li>
-            <li><b>SQL</b></li>
-            <li>Pyspark</li>
+            <li>PySpark</li>
             <li>Pig</li>
-            <br><br>
+          </ul>
+        </div>
 
-            <li><b>Pandas</b></li>
-            <li>Numpy</li>
-            <li><b>Scikit-learn</b></li>
+        <div class="skills-group">
+          <h3>Libraries &amp; frameworks</h3>
+          <ul class="tag-list">
+            <li class="primary">Pandas</li>
+            <li>NumPy</li>
+            <li class="primary">Scikit-learn</li>
             <li>TensorFlow</li>
             <li>Keras</li>
             <li>ggplot</li>
             <li>reshape</li>
-            <br><br>
-            <br><br>
-            
+          </ul>
+        </div>
+
+        <div class="skills-group">
+          <h3>Platforms</h3>
+          <ul class="tag-list">
             <li>RapidMiner</li>
-            <li><b>Tableau<b></li>
+            <li class="primary">Tableau</li>
             <li>SPSS</li>
-            <li><b>Hadoop<b></li>
-            <br><br>
-            <br><br>
-
-            <li><i>supervised and unsupervised learning</i></li>
-            <li><i>descriptive analysis</i></li>
-            <li><i>data visualization</i></li>
-            <li><i>optimization</i></li>
-            <li><i>data mining (classification, regression, clustering)</i></li>
-            <li><i>machine learning</i></li>
-            <li><i>hypothesis testing</i></li>
-            <li><i>marketing analytics</i></li>
-            <li><i>social network analytics</i></li>
-        </ul>
-    </div>
-    <!-- End #skills -->
-<!-- End #skills 
-    <div id="skills">
-        <h2 class="heading">Interests</h2>
-        <ul>
-            <li>photography - I am going to remind myself to bring my camera more often.</li>
-            
-            <li>soccer - mainly watching as I haven't played in a while</li><li>swimming</li>
-            <li>cooking</li>
-            <li>NBA</li>
-            <li>inspiring literature</li>
-            <li>fitness sports</li>
-        </ul>
-    </div>-->
-    <!-- End #skills -->
-
-    <div id="contact">
-        <h2>Get in Touch</h2>
-        <div id="contact-form">
-            <form method="POST" action="https://formspree.io/philsanfran7@gmail.com">
-                <input type="hidden" name="_subject" value="Contact request from personal website" />
-                <input type="email" name="_replyto" placeholder="Your email" required>
-                <textarea name="message" placeholder="Your message" required></textarea>
-                <button type="submit">Send</button>
-            </form>
+            <li class="primary">Hadoop</li>
+          </ul>
         </div>
-        <!-- End #contact-form -->
-    </div>
-    <!-- End #contact -->
-<!--This is a comment. Comments are not displayed in the browser-->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-5 copyright">
-                    <p>
-                        Copyright &copy; 2019 PS
-                    </p>
-                </div>
-                <div class="col-sm-2 top">
-                    <span id="to-top">
-                        <i class="fa fa-chevron-up" aria-hidden="true"></i>
-                    </span>
-                </div>
-                <div class="col-sm-5 social">
-                    <ul>
-                        <li>
-                            <a href="https://github.com/DSPhil" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a>
-                        </li>
-                        <li>
-                            <a href="https://linkedin.com/in/philippscherbel" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                        </li>
 
-                        <!--<li>
-                        <li>
-                            <a href="https://instagram.com/ptodap" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                        </li>
-                        
-                            <a href="https://stackoverflow.com/" target="_blank"><i class="fa fa-stack-overflow" aria-hidden="true"></i></a>
-                        </li>
-                        <li>
-                            <a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                        </li>
-                        <li>
-                            <a href="https://plus.google.com/" target="_blank"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
-                        </li>-->
-                    </ul>
-                </div>
-            </div>
+        <div class="skills-group">
+          <h3>Methods &amp; domains</h3>
+          <ul class="tag-list">
+            <li>Supervised &amp; unsupervised learning</li>
+            <li>Descriptive analysis</li>
+            <li>Data visualization</li>
+            <li>Optimization</li>
+            <li>Data mining</li>
+            <li>Machine learning</li>
+            <li>Hypothesis testing</li>
+            <li>Marketing analytics</li>
+            <li>Social network analytics</li>
+          </ul>
         </div>
-    </footer>
-    <!-- End footer -->
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="js/scripts.min.js"></script>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section section-alt">
+    <div class="section-inner contact-inner">
+      <h2>Get in touch</h2>
+      <p>Have a question, a project idea, or just want to say hi? Send a message below.</p>
+      <form id="contact-form" method="POST" action="https://formspree.io/philsanfran7@gmail.com">
+        <input type="hidden" name="_subject" value="Contact request from personal website">
+        <label for="email">Your email</label>
+        <input id="email" type="email" name="_replyto" placeholder="Your email" required>
+        <label for="message">Your message</label>
+        <textarea id="message" name="message" placeholder="Your message" required></textarea>
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <p>&copy; <span id="year"></span> Phil Scherbel</p>
+    <div class="social-links">
+      <a href="https://github.com/DSPhil" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+      </a>
+      <a href="https://linkedin.com/in/philippscherbel" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  var toggle = document.getElementById('nav-toggle');
+  var nav = document.getElementById('site-nav');
+  toggle.addEventListener('click', function(){
+    var isOpen = nav.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', isOpen);
+  });
+  nav.querySelectorAll('a').forEach(function(link){
+    link.addEventListener('click', function(){
+      nav.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
 </body>
-
 </html>
