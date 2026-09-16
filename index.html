@@ -86,17 +86,27 @@
       max-height:0;overflow:hidden;
       transition:max-height .25s ease;
     }
-    #site-nav.open{max-height:320px;}
+    #site-nav.open{max-height:380px;}
     #site-nav a{padding:14px 24px;border-bottom:1px solid var(--rule);}
     #nav-toggle{display:block;}
   }
 
   /* Hero */
   .hero{
+    position:relative;overflow:hidden;
     min-height:78vh;display:flex;align-items:center;
     padding:96px 24px 64px;
   }
-  .hero-inner{max-width:var(--max-wide);margin:0 auto;width:100%;}
+  .hero-bg{
+    position:absolute;inset:0;width:100%;height:100%;
+    object-fit:cover;object-position:center;
+    opacity:0.16;filter:grayscale(55%);
+  }
+  .hero-bg-fade{
+    position:absolute;inset:0;
+    background:linear-gradient(180deg, rgba(248,248,245,0.15) 0%, var(--bg) 96%);
+  }
+  .hero-inner{position:relative;max-width:var(--max-wide);margin:0 auto;width:100%;}
   .hero-inner h1{font-size:clamp(2.6rem,6vw,4.4rem);}
   .hero-role{
     font-family:var(--sans);font-size:1.15rem;color:var(--ink-soft);
@@ -106,17 +116,6 @@
     font-family:var(--sans);font-size:1.05rem;color:var(--ink-soft);
     max-width:44ch;margin-top:8px;
   }
-  .hero-line{width:100%;max-width:460px;height:auto;margin-top:40px;opacity:0.55;}
-  .hero-line path{
-    fill:none;stroke:var(--accent);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
-  }
-  @media (prefers-reduced-motion: no-preference){
-    .hero-line path{
-      stroke-dasharray:1;stroke-dashoffset:1;
-      animation:draw-line 1.6s ease-out .2s forwards;
-    }
-  }
-  @keyframes draw-line{to{stroke-dashoffset:0;}}
 
   /* Sections */
   .section{padding:88px 24px;}
@@ -186,11 +185,12 @@
     max-width:640px;border-left:3px solid var(--accent);padding-left:28px;
   }
   .project.text-only h3{font-size:1.25rem;margin-bottom:10px;}
-  .project a{
+  .project a,.pub-list a{
     display:inline-block;margin-top:12px;font-size:0.95rem;font-weight:500;
     color:var(--accent-strong);text-decoration:none;border-bottom:1px solid var(--accent);
   }
-  .project a:hover,.project a:focus-visible{color:var(--accent);}
+  .project a:hover,.project a:focus-visible,
+  .pub-list a:hover,.pub-list a:focus-visible{color:var(--accent);}
   .project a + a{margin-left:0;}
   .tableau-links a{display:block;margin-top:10px;}
   @media (max-width:700px){
@@ -268,6 +268,7 @@
       <a href="#experience">Experience</a>
       <a href="#education">Education</a>
       <a href="#projects">Projects</a>
+      <a href="#publications">Publications</a>
       <a href="#skills">Skills</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -277,13 +278,12 @@
 <main id="main">
 
   <section id="top" class="hero">
+    <img class="hero-bg" src="images/sf.jpg" alt="" aria-hidden="true" loading="eager">
+    <div class="hero-bg-fade" aria-hidden="true"></div>
     <div class="hero-inner">
       <h1>Phil Scherbel</h1>
       <p class="hero-role">Data scientist, NYC</p>
       <p class="hero-tag">Working at the intersection of business, data, and technology.</p>
-      <svg class="hero-line" viewBox="0 0 400 100" preserveAspectRatio="none" aria-hidden="true">
-        <path pathLength="1" d="M0,82 L45,64 L90,74 L135,40 L180,52 L225,24 L270,38 L315,16 L360,30 L400,10"></path>
-      </svg>
     </div>
   </section>
 
@@ -468,7 +468,46 @@
     </div>
   </section>
 
-  <section id="skills" class="section">
+  <section id="publications" class="section">
+    <div class="section-inner">
+      <h2>Publications</h2>
+      <div class="pub-list">
+
+        <div class="stack-item">
+          <div class="stack-date">Jun 2026</div>
+          <div>
+            <h3>Adopting AV1 for Real-Time Communication (RTC) at Scale</h3>
+            <p class="stack-role">Engineering at Meta</p>
+            <p>Co-authored with the Meta RTC video engineering team. A look inside Meta's multi-year effort to bring the AV1 codec to real-time video calls across Messenger and WhatsApp — covering low-complexity encoder design, ML-based device eligibility, adaptive codec switching between AV1 and H.264, rate control, and error-resilience techniques for keeping calls smooth under shaky networks and packet loss.</p>
+            <a href="https://engineering.fb.com/2026/06/22/video-engineering/adopting-av1-for-real-time-communication-rtc-meta/">Read on Engineering at Meta</a>
+          </div>
+        </div>
+
+        <div class="stack-item">
+          <div class="stack-date">Sep 2025</div>
+          <div>
+            <h3>How to Improve a Model Without (Obvious) Ground Truth</h3>
+            <p class="stack-role">Medium</p>
+            <p>House-price prediction is the textbook case with a clean target to train against. Real problems, like picking the right bitrate for a video call, often don't have one. This piece walks through how to make progress anyway: mining proxy signals from early connection behavior, anchoring to industry benchmarks where a direct label doesn't exist, and using post-deployment feedback to keep refining the model.</p>
+            <a href="https://medium.com/@philsanfran7/how-to-improve-a-model-without-obvious-ground-truth-355d00cc3954">Read on Medium</a>
+          </div>
+        </div>
+
+        <div class="stack-item">
+          <div class="stack-date">Sep 2020</div>
+          <div>
+            <h3>Introduction to Image Processing</h3>
+            <p class="stack-role">Medium</p>
+            <p>A walkthrough of a basic image-processing pipeline: resizing images, converting them to greyscale, and assembling the results into a model-ready dataframe.</p>
+            <a href="https://medium.com/@philsanfran7/introduction-to-image-processing-5ede0ea6186a">Read on Medium</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" class="section section-alt">
     <div class="section-inner">
       <h2>Skills</h2>
       <div class="skills-groups">
@@ -527,7 +566,7 @@
     </div>
   </section>
 
-  <section id="contact" class="section section-alt">
+  <section id="contact" class="section">
     <div class="section-inner contact-inner">
       <h2>Get in touch</h2>
       <p>Have a question, a project idea, or just want to say hi? Send a message below.</p>
@@ -553,6 +592,9 @@
       </a>
       <a href="https://linkedin.com/in/philippscherbel" target="_blank" rel="noopener" aria-label="LinkedIn">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+      </a>
+      <a href="https://medium.com/@philsanfran7" target="_blank" rel="noopener" aria-label="Medium">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><text x="12" y="16.3" text-anchor="middle" font-family="Georgia, serif" font-size="11.5" stroke="none" fill="currentColor">M</text></svg>
       </a>
     </div>
   </div>
