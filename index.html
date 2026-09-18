@@ -189,6 +189,11 @@
   }
   .thesis-card h3{font-size:1.16rem;margin-bottom:12px;}
   .thesis-card p{font-size:0.93rem;line-height:1.62;color:var(--ink-soft);}
+  .thesis-note{
+    max-width:72ch;margin-top:28px;padding-top:20px;
+    border-top:1px solid rgba(43,93,99,0.18);
+    color:var(--accent-strong);font-size:0.95rem;font-style:italic;
+  }
   @media (max-width:900px){
     .thesis-grid{grid-template-columns:1fr;}
   }
@@ -450,6 +455,7 @@
           <p>An assistant that can reliably book an appointment or flight, query internal systems, and complete a workflow is already extremely useful; it does not need IQ-300 reasoning. For most companies, connecting databases and operational tools—and making their data trustworthy and available—may matter more to day-to-day work than another incremental leap in LLM intelligence or agent-harness sophistication.</p>
         </article>
       </div>
+      <p class="thesis-note">These are my opinions and working hypotheses, not settled conclusions. I love talking about where AI and data science are heading, and I hope these ideas spark a few thoughtful discussions.</p>
     </div>
   </section>
 
@@ -779,6 +785,7 @@
       '.section-inner > h2',
       '.section-inner > .section-kicker',
       '.section-inner > .thesis-intro',
+      '.section-inner > .thesis-note',
       '.thesis-grid > .thesis-card',
       '.about-copy > h2',
       '.about-copy > p',
