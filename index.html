@@ -166,6 +166,40 @@
     .stack-date{padding-top:0;}
   }
 
+  /* Featured education curriculum */
+  .education-summary{max-width:70ch;color:var(--ink);}
+  .curriculum-grid{
+    display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;
+    margin:24px 0 18px;
+  }
+  .curriculum-card{
+    position:relative;overflow:hidden;
+    min-height:220px;padding:24px 20px;
+    background:linear-gradient(145deg,var(--bg) 0%,var(--accent-soft) 100%);
+    border:1px solid rgba(43,93,99,0.16);border-radius:var(--radius);
+    box-shadow:0 10px 24px rgba(28,29,27,0.06);
+  }
+  .curriculum-card::before{
+    content:"";position:absolute;inset:0 0 auto;height:4px;background:var(--accent);
+  }
+  .curriculum-label{
+    display:block;margin-bottom:18px;
+    font-family:var(--mono);font-size:0.72rem;font-weight:500;
+    color:var(--accent-strong);letter-spacing:0.09em;text-transform:uppercase;
+  }
+  .curriculum-card h4{
+    font-family:var(--serif);font-size:1.06rem;line-height:1.3;margin:0 0 10px;
+  }
+  .curriculum-card p{font-size:0.88rem;line-height:1.55;color:var(--ink-soft);}
+  .curriculum-link{
+    display:inline-block;color:var(--accent-strong);font-size:0.9rem;font-weight:500;
+    text-decoration:none;border-bottom:1px solid var(--accent);
+  }
+  @media (max-width:900px){
+    .curriculum-grid{grid-template-columns:1fr;}
+    .curriculum-card{min-height:0;}
+  }
+
   /* Projects */
   .project-list{display:flex;flex-direction:column;gap:64px;}
   .project.has-image{
@@ -384,17 +418,27 @@
         <div class="stack-item">
           <div class="stack-date">Jul 2018 —<br>May 2019</div>
           <div>
-            <h3>Emory University</h3>
+            <h3>Emory University - Goizueta Business School</h3>
             <p class="stack-role">Master of Science in Business Analytics</p>
-            <p>A very technical program taught in the business school, combining business, data, and technology. Topics covered included:</p>
-            <ul>
-              <li>Machine learning</li>
-              <li>Data visualization</li>
-              <li>Business analytics</li>
-              <li>Managing big data</li>
-              <li>Social network analytics, and more</li>
-            </ul>
-            <p>The program was very applied, which helped me gain coding and statistics skills as well as further technical depth, for example in distributed computing.</p>
+            <p class="education-summary">An applied program at the intersection of business, data, and technology, combining analytical problem-solving with hands-on modeling and data systems.</p>
+            <div class="curriculum-grid">
+              <article class="curriculum-card">
+                <span class="curriculum-label">01 / Business</span>
+                <h4>Intro to Business Analytics</h4>
+                <p>Framing problems data-analytically, applying data-mining techniques, and building and evaluating predictive models for classification and numeric prediction.</p>
+              </article>
+              <article class="curriculum-card">
+                <span class="curriculum-label">02 / Data</span>
+                <h4>AI &amp; Machine Learning</h4>
+                <p>Supervised and unsupervised learning, neural-network fundamentals, and online learning with stochastic gradient descent.</p>
+              </article>
+              <article class="curriculum-card">
+                <span class="curriculum-label">03 / Technology</span>
+                <h4>Managing Big Data</h4>
+                <p>Practical database and warehousing skills spanning querying, data modeling, ETL, data management, and the broader big-data ecosystem.</p>
+              </article>
+            </div>
+            <a class="curriculum-link" href="https://goizueta.emory.edu/msba/academics/courses" target="_blank" rel="noopener">Explore the MSBA curriculum</a>
           </div>
         </div>
 
