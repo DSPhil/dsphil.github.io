@@ -241,38 +241,14 @@
 
   /* Featured education curriculum */
   .education-summary{max-width:70ch;color:var(--ink);}
-  .curriculum-grid{
-    display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;
-    margin:24px 0 18px;
+  .stack-item .curriculum-list{
+    max-width:74ch;margin:22px 0 18px 1.15em;padding:0;list-style:disc;
   }
-  .curriculum-card{
-    position:relative;overflow:hidden;
-    min-height:220px;padding:24px 20px;
-    background:linear-gradient(145deg,rgba(255,255,255,0.7) 0%,rgba(220,231,230,0.58) 100%);
-    border:1px solid rgba(255,255,255,0.8);border-radius:20px;
-    -webkit-backdrop-filter:blur(16px) saturate(150%);
-    backdrop-filter:blur(16px) saturate(150%);
-    box-shadow:0 12px 28px rgba(28,29,27,0.08),inset 0 1px 0 rgba(255,255,255,0.8);
-  }
-  .curriculum-card::before{
-    content:"";position:absolute;inset:0 0 auto;height:4px;background:var(--accent);
-  }
-  .curriculum-label{
-    display:block;margin-bottom:18px;
-    font-family:var(--mono);font-size:0.72rem;font-weight:500;
-    color:var(--accent-strong);letter-spacing:0.09em;text-transform:uppercase;
-  }
-  .curriculum-card h4{
-    font-family:var(--serif);font-size:1.06rem;line-height:1.3;margin:0 0 10px;
-  }
-  .curriculum-card p{font-size:0.88rem;line-height:1.55;color:var(--ink-soft);}
+  .stack-item .curriculum-list li{margin-bottom:14px;padding-left:6px;}
+  .curriculum-list strong{color:var(--accent-strong);}
   .curriculum-link{
     display:inline-block;color:var(--accent-strong);font-size:0.9rem;font-weight:500;
     text-decoration:none;border-bottom:1px solid var(--accent);
-  }
-  @media (max-width:900px){
-    .curriculum-grid{grid-template-columns:1fr;}
-    .curriculum-card{min-height:0;}
   }
 
   /* Projects */
@@ -542,23 +518,11 @@
             <h3>Emory University - Goizueta Business School</h3>
             <p class="stack-role">Master of Science in Business Analytics</p>
             <p class="education-summary">An applied program at the intersection of business, data, and technology, combining analytical problem-solving with hands-on modeling and data systems.</p>
-            <div class="curriculum-grid">
-              <article class="curriculum-card">
-                <span class="curriculum-label">01 / Perspective</span>
-                <h4>Business</h4>
-                <p>I learned to translate business questions into well-defined analytical problems, select appropriate approaches, and evaluate results in context. Real-world projects reinforced how to turn evidence into clear, practical decisions.</p>
-              </article>
-              <article class="curriculum-card">
-                <span class="curriculum-label">02 / Foundation</span>
-                <h4>Data</h4>
-                <p>I built a foundation in data mining and predictive modeling, including classification, numeric prediction, and supervised and unsupervised learning. The program also covered databases, data warehousing, querying, data modeling, ETL, and the broader big-data ecosystem.</p>
-              </article>
-              <article class="curriculum-card">
-                <span class="curriculum-label">03 / Practice</span>
-                <h4>Technology</h4>
-                <p>I used R, Python, SQL, Unix tools, and cloud platforms to manipulate and analyze data. Hands-on work connected those tools into complete analytical workflows, from preparing data to implementing and assessing models.</p>
-              </article>
-            </div>
+            <ul class="curriculum-list">
+              <li><strong>Business.</strong> I learned to translate business questions into well-defined analytical problems and select the right approach for the decision at hand. Case-based work reinforced how to turn results into clear, practical recommendations.</li>
+              <li><strong>Data.</strong> Coursework covered data mining, classification, numeric prediction, and supervised and unsupervised learning. It also developed practical skills in databases, data warehousing, querying, data modeling, ETL, and the broader big-data ecosystem.</li>
+              <li><strong>Technology.</strong> I used R, Python, SQL, Unix tools, and cloud platforms to manipulate and analyze data. Projects connected these tools in end-to-end workflows, from preparing data to implementing and evaluating models.</li>
+            </ul>
             <a class="curriculum-link" href="https://goizueta.emory.edu/msba/academics/courses" target="_blank" rel="noopener">Explore the MSBA curriculum</a>
           </div>
         </div>
