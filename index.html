@@ -158,6 +158,41 @@
     margin-right:14px;vertical-align:middle;transform:translateY(-4px);
   }
 
+  /* Foreword */
+  .foreword-section .section-inner{
+    background:linear-gradient(145deg,rgba(255,255,255,0.68),rgba(220,231,230,0.48));
+  }
+  .section-kicker{
+    margin-bottom:10px;font-family:var(--mono);font-size:0.74rem;font-weight:500;
+    color:var(--accent-strong);letter-spacing:0.1em;text-transform:uppercase;
+  }
+  .foreword-section h2{margin-bottom:18px;}
+  .thesis-intro{
+    max-width:72ch;font-family:var(--serif);font-size:clamp(1.08rem,2vw,1.28rem);
+    color:var(--ink-soft);line-height:1.6;
+  }
+  .thesis-grid{
+    display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;
+    margin-top:34px;
+  }
+  .thesis-card{
+    padding:26px;background:rgba(255,255,255,0.62);
+    border:1px solid var(--glass-border);border-radius:20px;
+    -webkit-backdrop-filter:blur(16px) saturate(150%);
+    backdrop-filter:blur(16px) saturate(150%);
+    box-shadow:0 12px 28px rgba(28,29,27,0.07),inset 0 1px 0 rgba(255,255,255,0.78);
+  }
+  .thesis-number{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:34px;height:34px;margin-bottom:20px;border-radius:50%;
+    background:var(--accent);color:#fff;font-family:var(--mono);font-size:0.76rem;
+  }
+  .thesis-card h3{font-size:1.16rem;margin-bottom:12px;}
+  .thesis-card p{font-size:0.93rem;line-height:1.62;color:var(--ink-soft);}
+  @media (max-width:900px){
+    .thesis-grid{grid-template-columns:1fr;}
+  }
+
   /* About */
   .about-grid{display:block;}
   .about-copy{max-width:66ch;}
@@ -370,6 +405,7 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
     </button>
     <nav id="site-nav">
+      <a href="#ai-era">AI Era</a>
       <a href="#about">About</a>
       <a href="#experience">Experience</a>
       <a href="#education">Education</a>
@@ -389,6 +425,31 @@
       <h1>Phil Scherbel</h1>
       <p class="hero-role">Data scientist, NYC</p>
       <p class="hero-tag">Working at the intersection of business, data, and technology.</p>
+    </div>
+  </section>
+
+  <section id="ai-era" class="section foreword-section">
+    <div class="section-inner">
+      <p class="section-kicker">A short foreword · Three working hypotheses</p>
+      <h2>Data Scientists in the Era of AI</h2>
+      <p class="thesis-intro">Frontier labs' agents have rapidly changed how we work—but not necessarily how companies work. By “we,” I mainly mean big tech. These are three hypotheses about what has to happen before that change reaches everyone else.</p>
+      <div class="thesis-grid">
+        <article class="thesis-card">
+          <span class="thesis-number">01</span>
+          <h3>Adoption starts with accessible data</h3>
+          <p>Agents are highly successful where they can analyze vast codebases and work across well-connected systems, as they often can at technology companies. If a company's knowledge is scattered across Excel files, faxes—yes, they are still a thing—and Microsoft Access databases, the challenge becomes much greater. The companies facing those technical constraints may also have the hardest change-management work ahead of them.</p>
+        </article>
+        <article class="thesis-card">
+          <span class="thesis-number">02</span>
+          <h3>Automation does not remove accountability</h3>
+          <p>Even at technology companies, you still need someone to blame—or, more constructively, someone who is accountable. I do not imagine a world run only by agents: CEOs will keep their VPs, and teams at every level will still need people who own decisions and outcomes. What does seem clear is that entry-level roles are most exposed. Routine visualization and quick reporting are natural work for agents; advanced problems requiring judgment, context, and creativity remain safer—for now.</p>
+        </article>
+        <article class="thesis-card">
+          <span class="thesis-number">03</span>
+          <h3>Connectors may matter more than models</h3>
+          <p>An assistant that can reliably book an appointment or flight, query internal systems, and complete a workflow is already extremely useful; it does not need IQ-300 reasoning. For most companies, connecting databases and operational tools—and making their data trustworthy and available—may matter more to day-to-day work than another incremental leap in LLM intelligence or agent-harness sophistication.</p>
+        </article>
+      </div>
     </div>
   </section>
 
@@ -716,6 +777,9 @@
     var sections = document.querySelectorAll('main > .section');
     var itemSelector = [
       '.section-inner > h2',
+      '.section-inner > .section-kicker',
+      '.section-inner > .thesis-intro',
+      '.thesis-grid > .thesis-card',
       '.about-copy > h2',
       '.about-copy > p',
       '.timeline > .stack-item',
