@@ -199,19 +199,38 @@
   }
 
   /* Skills */
-  .skills-groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:40px;}
-  .skills-group h3{
-    font-family:var(--sans);font-size:0.9rem;font-weight:600;color:var(--ink-soft);
-    margin-bottom:14px;
+  .skills-groups{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;}
+  .skills-group{
+    background:var(--bg);border:1px solid var(--rule);border-radius:var(--radius);
+    padding:28px;
   }
+  .skills-group.featured{
+    background:var(--accent-soft);border-color:transparent;
+  }
+  .skills-group h3{
+    font-family:var(--serif);font-size:1.15rem;font-weight:600;color:var(--ink);
+    margin-bottom:8px;
+  }
+  .skills-group p{font-size:0.9rem;color:var(--ink-soft);margin-bottom:18px;}
   .tag-list{display:flex;flex-wrap:wrap;gap:8px;}
   .tag-list li{
     font-size:0.85rem;padding:6px 12px;border-radius:var(--radius);
-    border:1px solid var(--rule);color:var(--ink-soft);
+    border:1px solid var(--rule);background:var(--bg-alt);color:var(--ink-soft);
   }
   .tag-list li.primary{
-    background:var(--accent-soft);border-color:var(--accent-soft);
-    color:var(--accent-strong);font-weight:500;
+    background:var(--accent);border-color:var(--accent);
+    color:#fff;font-weight:500;
+  }
+  .skills-group.featured .tag-list li{
+    background:rgba(248,248,245,0.72);border-color:rgba(43,93,99,0.2);
+  }
+  .skills-group.featured .tag-list li.primary{
+    background:var(--accent);border-color:var(--accent);
+    color:#fff;font-weight:500;
+  }
+  @media (max-width:700px){
+    .skills-groups{grid-template-columns:1fr;}
+    .skills-group{padding:22px;}
   }
 
   /* Contact */
@@ -508,52 +527,59 @@
       <div class="skills-groups">
 
         <div class="skills-group">
-          <h3>Languages &amp; tools</h3>
+          <h3>Languages &amp; data</h3>
+          <p>Building analyses and working with data at scale.</p>
           <ul class="tag-list">
             <li class="primary">R</li>
             <li class="primary">Python</li>
             <li class="primary">SQL</li>
             <li>Hive</li>
             <li>PySpark</li>
-            <li>Pig</li>
-          </ul>
-        </div>
-
-        <div class="skills-group">
-          <h3>Libraries &amp; frameworks</h3>
-          <ul class="tag-list">
-            <li class="primary">Pandas</li>
+            <li>Hadoop</li>
+            <li>Pandas</li>
             <li>NumPy</li>
-            <li class="primary">Scikit-learn</li>
-            <li>TensorFlow</li>
-            <li>Keras</li>
-            <li>ggplot</li>
+            <li>Pig</li>
             <li>reshape</li>
           </ul>
         </div>
 
-        <div class="skills-group">
-          <h3>Platforms</h3>
+        <div class="skills-group featured">
+          <h3>Causal inference &amp; experimentation</h3>
+          <p>Estimating impact when randomized experiments are not available.</p>
           <ul class="tag-list">
-            <li>RapidMiner</li>
-            <li class="primary">Tableau</li>
-            <li>SPSS</li>
-            <li class="primary">Hadoop</li>
+            <li class="primary">Causal inference</li>
+            <li>Difference-in-Differences (DiD)</li>
+            <li>Propensity Score Matching (PSM)</li>
+            <li>Hypothesis testing</li>
           </ul>
         </div>
 
         <div class="skills-group">
-          <h3>Methods &amp; domains</h3>
+          <h3>Machine learning</h3>
+          <p>Developing predictive models and discovering patterns in data.</p>
           <ul class="tag-list">
-            <li>Supervised &amp; unsupervised learning</li>
-            <li>Descriptive analysis</li>
-            <li>Data visualization</li>
-            <li>Optimization</li>
+            <li class="primary">Scikit-learn</li>
+            <li>Supervised learning</li>
+            <li>Unsupervised learning</li>
+            <li>TensorFlow</li>
+            <li>Keras</li>
             <li>Data mining</li>
-            <li>Machine learning</li>
-            <li>Hypothesis testing</li>
+            <li>Optimization</li>
+          </ul>
+        </div>
+
+        <div class="skills-group">
+          <h3>Analytics &amp; visualization</h3>
+          <p>Turning quantitative findings into clear business decisions.</p>
+          <ul class="tag-list">
+            <li class="primary">Tableau</li>
+            <li>Data visualization</li>
+            <li>Descriptive analysis</li>
+            <li>ggplot</li>
             <li>Marketing analytics</li>
             <li>Social network analytics</li>
+            <li>RapidMiner</li>
+            <li>SPSS</li>
           </ul>
         </div>
 
