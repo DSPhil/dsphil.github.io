@@ -100,20 +100,19 @@
   .hero-bg{
     position:absolute;inset:0;width:100%;height:100%;
     object-fit:cover;object-position:center;
-    opacity:0.16;filter:grayscale(55%);
   }
   .hero-bg-fade{
     position:absolute;inset:0;
-    background:linear-gradient(180deg, rgba(248,248,245,0.15) 0%, var(--bg) 96%);
+    background:linear-gradient(180deg, rgba(28,29,27,0.38) 0%, rgba(28,29,27,0.58) 100%);
   }
   .hero-inner{position:relative;max-width:var(--max-wide);margin:0 auto;width:100%;}
-  .hero-inner h1{font-size:clamp(2.6rem,6vw,4.4rem);}
+  .hero-inner h1{font-size:clamp(2.6rem,6vw,4.4rem);color:#fff;}
   .hero-role{
-    font-family:var(--sans);font-size:1.15rem;color:var(--ink-soft);
+    font-family:var(--sans);font-size:1.15rem;color:rgba(255,255,255,0.9);
     margin-top:14px;
   }
   .hero-tag{
-    font-family:var(--sans);font-size:1.05rem;color:var(--ink-soft);
+    font-family:var(--sans);font-size:1.05rem;color:rgba(255,255,255,0.9);
     max-width:44ch;margin-top:8px;
   }
 
@@ -128,13 +127,9 @@
   }
 
   /* About */
-  .about-grid{display:grid;grid-template-columns:220px 1fr;gap:56px;align-items:start;}
-  .about-portrait img{border-radius:var(--radius);width:100%;}
+  .about-grid{display:block;}
+  .about-copy{max-width:66ch;}
   .about-copy p{max-width:66ch;color:var(--ink);}
-  @media (max-width:700px){
-    .about-grid{grid-template-columns:1fr;}
-    .about-portrait{max-width:200px;}
-  }
 
   /* Stack items (experience + education share this) */
   .stack-item{
@@ -178,7 +173,11 @@
   }
   .project:nth-of-type(even).has-image .project-media{order:2;}
   .project:nth-of-type(even).has-image .project-copy{order:1;}
-  .project-media img{border-radius:var(--radius);border:1px solid var(--rule);}
+  .project-media{display:flex;justify-content:center;}
+  .project-media img{
+    width:100%;max-width:340px;height:auto;
+    border-radius:var(--radius);border:1px solid var(--rule);
+  }
   .project-copy h3{font-size:1.25rem;margin-bottom:10px;}
   .project-copy p{color:var(--ink);max-width:52ch;}
   .project.text-only{
@@ -277,7 +276,7 @@
 <main id="main">
 
   <section id="top" class="hero">
-    <img class="hero-bg" src="images/VMV03495.jpg" alt="" aria-hidden="true" loading="eager">
+    <img class="hero-bg" src="images/lead-bg.jpg" alt="" aria-hidden="true" loading="eager">
     <div class="hero-bg-fade" aria-hidden="true"></div>
     <div class="hero-inner">
       <h1>Phil Scherbel</h1>
@@ -288,9 +287,6 @@
 
   <section id="about" class="section">
     <div class="section-inner about-grid">
-      <div class="about-portrait">
-        <img src="images/me.jpg" alt="Phil Scherbel" width="300" height="300" loading="lazy">
-      </div>
       <div class="about-copy">
         <h2>About</h2>
         <p>Hi there and welcome. I started building this page to showcase projects I'd like to share — and also to learn some HTML. I try to explain my projects and the steps I take in detail, since I know how confusing it can be to look at random code snippets without any description.</p>
