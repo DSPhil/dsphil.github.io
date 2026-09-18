@@ -271,15 +271,11 @@
   /* Skills */
   .skills-groups{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;}
   .skills-group{
-    background:rgba(255,255,255,0.5);border:1px solid var(--glass-border);
+    background:#fff;border:1px solid var(--glass-border);
     border-radius:20px;padding:28px;
     -webkit-backdrop-filter:blur(16px) saturate(150%);
     backdrop-filter:blur(16px) saturate(150%);
     box-shadow:0 12px 28px rgba(28,29,27,0.07),inset 0 1px 0 rgba(255,255,255,0.76);
-  }
-  .skills-group.featured{
-    background:linear-gradient(145deg,rgba(220,231,230,0.84),rgba(255,255,255,0.52));
-    border-color:rgba(255,255,255,0.82);
   }
   .skills-group h3{
     font-family:var(--serif);font-size:1.15rem;font-weight:600;color:var(--ink);
@@ -292,13 +288,6 @@
     border:1px solid rgba(255,255,255,0.82);background:rgba(255,255,255,0.48);color:var(--ink-soft);
   }
   .tag-list li.primary{
-    background:var(--accent);border-color:var(--accent);
-    color:#fff;font-weight:500;
-  }
-  .skills-group.featured .tag-list li{
-    background:rgba(248,248,245,0.72);border-color:rgba(43,93,99,0.2);
-  }
-  .skills-group.featured .tag-list li.primary{
     background:var(--accent);border-color:var(--accent);
     color:#fff;font-weight:500;
   }
