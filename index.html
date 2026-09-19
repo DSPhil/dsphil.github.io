@@ -23,18 +23,15 @@
     --accent-strong: #1E4448;
     --accent-soft: #DCE7E6;
     --rule: #DDDBCD;
-    --glass: rgba(255,255,255,0.5);
-    --glass-strong: rgba(255,255,255,0.68);
     --glass-border: rgba(255,255,255,0.78);
-    --glass-shadow: 0 24px 70px rgba(43,63,64,0.12);
+    --shadow: 0 12px 36px rgba(43,63,64,0.1);
     --font: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
     --text-size: 1rem;
     --heading-size: 1.5rem;
     --display-size: clamp(2.75rem,6vw,4.4rem);
     --max-wide: 1200px;
     --max-text: 640px;
-    --radius: 14px;
-    --radius-large: 28px;
+    --radius: 18px;
   }
 
   *{box-sizing:border-box;}
@@ -43,11 +40,7 @@
     margin:0;
     min-height:100vh;
     background-color:var(--bg);
-    background-image:
-      radial-gradient(circle at 8% 14%, rgba(135,190,201,0.42) 0, transparent 32rem),
-      radial-gradient(circle at 92% 44%, rgba(231,194,169,0.42) 0, transparent 36rem),
-      linear-gradient(135deg,#f7f8f4 0%,#edf3f1 52%,#f7f1ec 100%);
-    background-attachment:fixed;
+    background-image:linear-gradient(135deg,#f7f8f4 0%,#edf3f1 100%);
     color:var(--ink);
     font-family:var(--font);
     font-size:var(--text-size);
@@ -76,7 +69,6 @@
     -webkit-backdrop-filter:blur(24px) saturate(180%);
     backdrop-filter:blur(24px) saturate(180%);
     border-bottom:1px solid rgba(255,255,255,0.76);
-    box-shadow:0 8px 28px rgba(43,63,64,0.07);
   }
   .header-inner{
     max-width:var(--max-wide);margin:0 auto;padding:0 24px;
@@ -128,10 +120,10 @@
     margin:0 auto 0 max(0px,calc((100% - var(--max-wide))/2));width:100%;
     padding:clamp(24px,4vw,38px);
     background:rgba(18,30,31,0.22);
-    border:1px solid rgba(255,255,255,0.34);border-radius:var(--radius-large);
+    border:1px solid rgba(255,255,255,0.34);border-radius:var(--radius);
     -webkit-backdrop-filter:blur(20px) saturate(155%);
     backdrop-filter:blur(20px) saturate(155%);
-    box-shadow:0 30px 80px rgba(0,0,0,0.2),inset 0 1px 0 rgba(255,255,255,0.28);
+    box-shadow:var(--shadow);
   }
   .hero-inner h1{font-size:var(--display-size);color:#fff;}
   .hero-role{
@@ -144,28 +136,12 @@
   }
 
   /* Sections */
-  .section{padding:64px 24px;position:relative;}
-  .section-alt{background:transparent;}
+  .section{padding:72px 24px;position:relative;}
   .section-inner{
-    max-width:var(--max-wide);margin:0 auto;padding:clamp(30px,5vw,58px);
-    background:var(--glass);border:1px solid var(--glass-border);
-    border-radius:var(--radius-large);
-    -webkit-backdrop-filter:blur(28px) saturate(165%);
-    backdrop-filter:blur(28px) saturate(165%);
-    box-shadow:var(--glass-shadow),inset 0 1px 0 rgba(255,255,255,0.72);
+    max-width:var(--max-wide);margin:0 auto;
   }
   .section h2{font-size:var(--heading-size);margin-bottom:40px;}
-  .section h2::before{
-    content:"";display:inline-block;width:26px;height:4px;
-    background:linear-gradient(90deg,var(--accent),rgba(43,93,99,0.35));
-    border-radius:999px;
-    margin-right:14px;vertical-align:middle;transform:translateY(-4px);
-  }
-
   /* Foreword */
-  .foreword-section .section-inner{
-    background:linear-gradient(145deg,rgba(255,255,255,0.68),rgba(220,231,230,0.48));
-  }
   .section-kicker{
     margin-bottom:10px;font-family:var(--font);font-size:var(--text-size);font-weight:600;
     color:var(--accent-strong);letter-spacing:0.1em;text-transform:uppercase;
@@ -176,25 +152,21 @@
     color:var(--ink-soft);line-height:1.6;
   }
   .thesis-grid{
-    display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;
+    display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;
     margin-top:34px;
   }
-  .thesis-card{
-    padding:26px;background:rgba(255,255,255,0.62);
-    border:1px solid var(--glass-border);border-radius:20px;
-    -webkit-backdrop-filter:blur(16px) saturate(150%);
-    backdrop-filter:blur(16px) saturate(150%);
-    box-shadow:0 12px 28px rgba(28,29,27,0.07),inset 0 1px 0 rgba(255,255,255,0.78);
-  }
+  .thesis-card{padding:0 26px 0 0;}
+  .thesis-card + .thesis-card{padding-left:26px;border-left:1px solid var(--rule);}
   .thesis-number{
-    display:inline-flex;align-items:center;justify-content:center;
-    width:34px;height:34px;margin-bottom:20px;border-radius:50%;
-    background:var(--accent);color:#fff;font-family:var(--font);font-size:var(--text-size);
+    display:block;margin-bottom:12px;color:var(--accent-strong);
+    font-family:var(--font);font-size:var(--text-size);font-weight:600;
   }
   .thesis-card h3{font-size:var(--text-size);font-weight:700;margin-bottom:12px;}
   .thesis-card p{font-size:var(--text-size);line-height:1.62;color:var(--ink-soft);}
   @media (max-width:900px){
     .thesis-grid{grid-template-columns:1fr;}
+    .thesis-card,.thesis-card + .thesis-card{padding:20px 0 0;border-left:0;border-top:1px solid var(--rule);}
+    .thesis-card:first-child{padding-top:0;border-top:0;}
   }
 
   /* About */
@@ -212,7 +184,7 @@
     font-family:var(--font);font-size:var(--text-size);color:var(--ink-soft);
     letter-spacing:0.01em;padding-top:4px;
   }
-  .stack-item h3{font-size:var(--heading-size);margin-bottom:2px;}
+  .stack-item h3{font-size:var(--text-size);font-weight:700;margin-bottom:2px;}
   .stack-role{
     font-family:var(--font);font-weight:600;font-size:var(--text-size);
     color:var(--accent-strong);margin-bottom:10px;
@@ -221,18 +193,9 @@
   .stack-item ul{margin:10px 0 10px 1.1em;list-style:disc;}
   .stack-item li{margin-bottom:4px;color:var(--ink);font-size:var(--text-size);}
 
-  #experience .timeline{position:relative;}
-  @media (min-width:701px){
-    #experience .timeline::before{
-      content:"";position:absolute;left:156px;top:6px;bottom:6px;width:1px;background:var(--rule);
-    }
-    #experience .stack-item::before{
-      content:"";position:absolute;left:152px;top:34px;width:9px;height:9px;
-      border-radius:50%;background:var(--accent);border:2px solid rgba(255,255,255,0.9);
-      box-shadow:0 0 0 5px rgba(43,93,99,0.1);
-    }
-    #experience .stack-item:first-child::before{top:6px;}
-  }
+  #experience .stack-item:nth-child(n+4){padding:20px 0;}
+  #experience .stack-item:nth-child(n+4) h3,
+  #experience .stack-item:nth-child(n+4) .stack-role{color:var(--ink-soft);}
   @media (max-width:700px){
     .stack-item{grid-template-columns:1fr;gap:6px;}
     .stack-date{padding-top:0;}
@@ -251,24 +214,23 @@
   }
 
   /* Projects */
-  .project-list{display:flex;flex-direction:column;gap:64px;}
+  .project-list{display:flex;flex-direction:column;}
+  .project{padding:32px 0;border-top:1px solid var(--rule);}
+  .project:first-child{padding-top:0;border-top:0;}
   .project.has-image{
-    display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;
+    display:grid;grid-template-columns:180px minmax(0,1fr);gap:36px;align-items:center;
   }
-  .project:nth-of-type(even).has-image .project-media{order:2;}
-  .project:nth-of-type(even).has-image .project-copy{order:1;}
-  .project-media{display:flex;justify-content:center;}
+  .project-media{display:flex;justify-content:flex-start;}
   .project-media img{
-    width:100%;max-width:240px;height:auto;
-    border-radius:20px;border:1px solid var(--glass-border);
-    box-shadow:0 16px 36px rgba(28,29,27,0.13);
+    width:100%;max-width:180px;height:auto;
+    border-radius:var(--radius);border:1px solid var(--rule);
   }
-  .project-copy h3{font-size:var(--heading-size);margin-bottom:10px;}
+  .project-copy h3{font-size:var(--text-size);font-weight:700;margin-bottom:10px;}
   .project-copy p{color:var(--ink);max-width:52ch;}
   .project.text-only{
-    max-width:640px;border-left:3px solid var(--accent);padding-left:28px;
+    max-width:640px;
   }
-  .project.text-only h3{font-size:var(--heading-size);margin-bottom:10px;}
+  .project.text-only h3{font-size:var(--text-size);font-weight:700;margin-bottom:10px;}
   .project a,.pub-list a{
     display:inline-block;margin-top:12px;font-size:var(--text-size);font-weight:600;
     color:var(--accent-strong);text-decoration:none;border-bottom:1px solid var(--accent);
@@ -279,32 +241,22 @@
   .tableau-links a{display:block;margin-top:10px;}
   @media (max-width:700px){
     .project.has-image{grid-template-columns:1fr;}
-    .project:nth-of-type(even).has-image .project-media,
-    .project:nth-of-type(even).has-image .project-copy{order:initial;}
+    .project-media img{max-width:160px;}
   }
 
   /* Skills */
-  .skills-groups{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;}
+  .skills-groups{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:44px 56px;}
   .skills-group{
-    background:#fff;border:1px solid var(--glass-border);
-    border-radius:20px;padding:28px;
-    -webkit-backdrop-filter:blur(16px) saturate(150%);
-    backdrop-filter:blur(16px) saturate(150%);
-    box-shadow:0 12px 28px rgba(28,29,27,0.07),inset 0 1px 0 rgba(255,255,255,0.76);
+    padding-top:20px;border-top:1px solid var(--rule);
   }
   .skills-group h3{
-    font-family:var(--font);font-size:var(--heading-size);font-weight:600;color:var(--ink);
+    font-family:var(--font);font-size:var(--text-size);font-weight:700;color:var(--ink);
     margin-bottom:8px;
   }
-  .skills-group p{font-size:var(--text-size);color:var(--ink-soft);margin-bottom:18px;}
-  .tag-list{display:flex;flex-wrap:wrap;gap:8px;}
-  .tag-list li{
-    font-size:var(--text-size);padding:6px 12px;border-radius:var(--radius);
-    border:1px solid rgba(255,255,255,0.82);background:rgba(255,255,255,0.48);color:var(--ink-soft);
-  }
+  .skills-group p{font-size:var(--text-size);color:var(--ink-soft);margin-bottom:10px;}
+  .skills-group .skill-list{line-height:1.8;margin-bottom:0;}
   @media (max-width:700px){
     .skills-groups{grid-template-columns:1fr;}
-    .skills-group{padding:22px;}
   }
 
   /* Contact */
@@ -330,15 +282,11 @@
   #contact-form button:hover,#contact-form button:focus-visible{background:var(--accent);}
 
   /* Footer */
-  .site-footer{padding:40px 24px;}
+  .site-footer{padding:0 24px 40px;}
   .footer-inner{
     max-width:var(--max-wide);margin:0 auto;display:flex;
     align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;
-    padding:18px 24px;background:rgba(255,255,255,0.46);
-    border:1px solid var(--glass-border);border-radius:20px;
-    -webkit-backdrop-filter:blur(20px) saturate(160%);
-    backdrop-filter:blur(20px) saturate(160%);
-    box-shadow:0 12px 36px rgba(43,63,64,0.08),inset 0 1px 0 rgba(255,255,255,0.72);
+    padding:28px 0;border-top:1px solid var(--rule);
   }
   .footer-inner p{color:var(--ink-faint);font-size:var(--text-size);}
   .social-links{display:flex;gap:18px;}
@@ -348,25 +296,24 @@
 
   @media (prefers-reduced-motion:no-preference){
     html.reveal-enabled .reveal-item{
-      opacity:0;transform:translateY(18px);filter:blur(7px);
+      opacity:0;transform:translateY(10px);
       clip-path:inset(0 100% 0 0);
     }
     html.reveal-enabled .reveal-visible .reveal-item{
-      animation:write-reveal 0.82s cubic-bezier(0.22,1,0.36,1) both;
+      animation:write-reveal 0.55s cubic-bezier(0.22,1,0.36,1) both;
       animation-delay:var(--reveal-delay,0ms);
     }
     @keyframes write-reveal{
-      0%{opacity:0;transform:translateY(18px);filter:blur(7px);clip-path:inset(0 100% 0 0);}
+      0%{opacity:0;transform:translateY(10px);clip-path:inset(0 100% 0 0);}
       45%{opacity:1;}
-      100%{opacity:1;transform:translateY(0);filter:blur(0);clip-path:inset(0 0 0 0);}
+      100%{opacity:1;transform:translateY(0);clip-path:inset(0 0 0 0);}
     }
   }
 
   @media (max-width:700px){
     .hero{padding:82px 14px 44px;}
-    .hero-inner{border-radius:22px;}
+    .hero-inner{border-radius:var(--radius);}
     .section{padding:38px 14px;}
-    .section-inner{padding:28px 20px;border-radius:22px;}
     .site-footer{padding:28px 14px;}
   }
 
@@ -657,62 +604,25 @@
         <div class="skills-group">
           <h3>Product &amp; causal analytics</h3>
           <p>Measuring impact and translating evidence into product decisions.</p>
-          <ul class="tag-list">
-            <li>Difference-in-Differences (DiD)</li>
-            <li>Propensity Score Matching (PSM)</li>
-            <li>Experimental design</li>
-            <li>Hypothesis testing</li>
-            <li>Metrics &amp; measurement</li>
-            <li>Cohort analysis</li>
-          </ul>
+          <p class="skill-list">Difference-in-Differences (DiD), Propensity Score Matching (PSM), experimental design, hypothesis testing, metrics &amp; measurement, cohort analysis.</p>
         </div>
 
         <div class="skills-group">
           <h3>Machine learning &amp; modeling</h3>
           <p>Building, evaluating, and interpreting predictive models.</p>
-          <ul class="tag-list">
-            <li>Predictive modeling</li>
-            <li>Classification</li>
-            <li>Regression</li>
-            <li>Clustering</li>
-            <li>Supervised learning</li>
-            <li>Unsupervised learning</li>
-            <li>Model evaluation</li>
-            <li>Scikit-learn</li>
-            <li>TensorFlow</li>
-            <li>Keras</li>
-          </ul>
+          <p class="skill-list">Predictive modeling, classification, regression, clustering, supervised learning, unsupervised learning, model evaluation, Scikit-learn, TensorFlow, Keras.</p>
         </div>
 
         <div class="skills-group">
           <h3>Data &amp; engineering</h3>
           <p>Preparing, transforming, and working with data at scale.</p>
-          <ul class="tag-list">
-            <li>SQL</li>
-            <li>Python</li>
-            <li>R</li>
-            <li>PySpark</li>
-            <li>Hive</li>
-            <li>Hadoop</li>
-            <li>ETL</li>
-            <li>Data modeling</li>
-            <li>Data warehousing</li>
-            <li>Pandas</li>
-            <li>NumPy</li>
-          </ul>
+          <p class="skill-list">SQL, Python, R, PySpark, Hive, Hadoop, ETL, data modeling, data warehousing, Pandas, NumPy.</p>
         </div>
 
         <div class="skills-group">
           <h3>Visualization &amp; decision support</h3>
           <p>Communicating analysis clearly and supporting better decisions.</p>
-          <ul class="tag-list">
-            <li>Tableau</li>
-            <li>ggplot</li>
-            <li>Data visualization</li>
-            <li>Optimization</li>
-            <li>Business analytics</li>
-            <li>Stakeholder communication</li>
-          </ul>
+          <p class="skill-list">Tableau, ggplot, data visualization, optimization, business analytics, stakeholder communication.</p>
         </div>
 
       </div>
@@ -761,7 +671,7 @@
     sections.forEach(function(section){
       section.querySelectorAll(itemSelector).forEach(function(item,index){
         item.classList.add('reveal-item');
-        item.style.setProperty('--reveal-delay',Math.min(index * 85,510) + 'ms');
+        item.style.setProperty('--reveal-delay',Math.min(index * 60,360) + 'ms');
       });
     });
     document.documentElement.classList.add('reveal-enabled');
