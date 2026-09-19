@@ -53,7 +53,7 @@
     -webkit-backdrop-filter:blur(14px) saturate(145%);
     backdrop-filter:blur(14px) saturate(145%);
     opacity:0;visibility:hidden;
-    transition:opacity .4s ease,visibility 0s linear .4s;
+    transition:opacity .2s ease,visibility 0s linear .2s;
   }
   html.nav-in-flight body::after{
     opacity:1;visibility:visible;transition-delay:0s;
@@ -80,7 +80,7 @@
     -webkit-backdrop-filter:blur(24px) saturate(180%);
     backdrop-filter:blur(24px) saturate(180%);
     border-bottom:1px solid rgba(255,255,255,0.76);
-    transition:background-color .35s ease,backdrop-filter .35s ease;
+    transition:background-color .2s ease,backdrop-filter .2s ease;
   }
   html.nav-in-flight .site-header{
     background:rgba(248,248,245,0.8);
@@ -676,25 +676,33 @@
     var activeSection = null;
     var settleTimer = null;
     var fallbackTimer = null;
+    var revealTimer = null;
 
     function clearNavigationState(){
       clearTimeout(settleTimer);
       clearTimeout(fallbackTimer);
+      clearTimeout(revealTimer);
       document.documentElement.classList.remove('nav-in-flight');
       activeSection = null;
     }
 
     function finishArrival(){
       if (!activeSection) return;
+      var arrivedSection = activeSection;
       activeSection = null;
       clearTimeout(settleTimer);
       clearTimeout(fallbackTimer);
       document.documentElement.classList.remove('nav-in-flight');
+      revealTimer = setTimeout(function(){
+        document.dispatchEvent(new CustomEvent('sectionnavigationarrived',{
+          detail:{section:arrivedSection}
+        }));
+      },200);
     }
 
     function scheduleArrival(){
       clearTimeout(settleTimer);
-      settleTimer = setTimeout(finishArrival,120);
+      settleTimer = setTimeout(finishArrival,60);
     }
 
     window.addEventListener('scroll',function(){
@@ -745,13 +753,25 @@
     });
     document.documentElement.classList.add('reveal-enabled');
 
-    var observer = new IntersectionObserver(function(entries){
+    var observer;
+
+    function revealSection(section){
+      if (section.classList.contains('reveal-visible')) return;
+      section.classList.add('reveal-visible');
+      observer.unobserve(section);
+    }
+
+    observer = new IntersectionObserver(function(entries){
       entries.forEach(function(entry){
         if (!entry.isIntersecting) return;
-        entry.target.classList.add('reveal-visible');
-        observer.unobserve(entry.target);
+        if (document.documentElement.classList.contains('nav-in-flight')) return;
+        revealSection(entry.target);
       });
     },{threshold:0.12,rootMargin:'0px 0px -8% 0px'});
+
+    document.addEventListener('sectionnavigationarrived',function(event){
+      revealSection(event.detail.section);
+    });
 
     sections.forEach(function(section){observer.observe(section);});
   })();
