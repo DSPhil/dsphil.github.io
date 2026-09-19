@@ -78,9 +78,16 @@
   #site-nav{display:flex;gap:28px;}
   #site-nav a{
     font-size:var(--text-size);text-decoration:none;color:var(--ink-soft);
-    border-bottom:1px solid transparent;padding:4px 1px;transition:color .15s, border-color .15s;
+    padding:5px 10px;border:1px solid transparent;border-radius:999px;
+    transition:color .18s ease,background-color .18s ease,border-color .18s ease;
   }
-  #site-nav a:hover,#site-nav a:focus-visible{color:var(--ink);border-bottom-color:var(--accent);}
+  #site-nav a:hover,#site-nav a:focus-visible{color:var(--ink);background:rgba(255,255,255,0.34);}
+  #site-nav a.active{
+    color:var(--ink);background:rgba(255,255,255,0.58);
+    border-color:rgba(255,255,255,0.82);
+    -webkit-backdrop-filter:blur(10px) saturate(155%);
+    backdrop-filter:blur(10px) saturate(155%);
+  }
   #nav-toggle{
     display:none;background:none;border:none;cursor:pointer;padding:8px;color:var(--ink);
   }
@@ -97,7 +104,14 @@
       transition:max-height .25s ease;
     }
     #site-nav.open{max-height:460px;}
-    #site-nav a{padding:14px 24px;border-bottom:1px solid var(--rule);}
+    #site-nav a{
+      padding:14px 24px;border:0;border-bottom:1px solid rgba(221,219,205,0.62);
+      border-radius:0;
+    }
+    #site-nav a.active{
+      padding-left:21px;border-left:3px solid var(--accent);
+      background:rgba(255,255,255,0.46);
+    }
     #nav-toggle{display:block;}
   }
 
@@ -155,7 +169,10 @@
     display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;
     margin-top:34px;
   }
-  .thesis-card{padding:0 26px 0 0;}
+  .thesis-card{
+    padding:0 26px 0 0;border-radius:12px;
+    transition:background-color .18s ease,box-shadow .18s ease;
+  }
   .thesis-card + .thesis-card{padding-left:26px;border-left:1px solid var(--rule);}
   .thesis-number{
     display:block;margin-bottom:12px;color:var(--accent-strong);
@@ -215,7 +232,10 @@
 
   /* Projects */
   .project-list{display:flex;flex-direction:column;}
-  .project{padding:32px 0;border-top:1px solid var(--rule);}
+  .project{
+    padding:32px 0;border-top:1px solid var(--rule);border-radius:var(--radius);
+    transition:background-color .18s ease,box-shadow .18s ease;
+  }
   .project:first-child{padding-top:0;border-top:0;}
   .project.has-image{
     display:grid;grid-template-columns:180px minmax(0,1fr);gap:36px;align-items:center;
@@ -237,11 +257,30 @@
   }
   .project a:hover,.project a:focus-visible,
   .pub-list a:hover,.pub-list a:focus-visible{color:var(--accent);}
+  .project:focus-within,.pub-list .stack-item:focus-within{
+    background:rgba(255,255,255,0.4);
+    box-shadow:0 0 0 1px rgba(255,255,255,0.76);
+    -webkit-backdrop-filter:blur(10px) saturate(145%);
+    backdrop-filter:blur(10px) saturate(145%);
+  }
+  .pub-list .stack-item{
+    border-radius:var(--radius);
+    transition:background-color .18s ease,box-shadow .18s ease;
+  }
   .project a + a{margin-left:0;}
   .tableau-links a{display:block;margin-top:10px;}
   @media (max-width:700px){
     .project.has-image{grid-template-columns:1fr;}
     .project-media img{max-width:160px;}
+  }
+
+  @media (hover:hover){
+    .thesis-card:hover,.project:hover,.pub-list .stack-item:hover{
+      background:rgba(255,255,255,0.4);
+      box-shadow:0 0 0 1px rgba(255,255,255,0.76);
+      -webkit-backdrop-filter:blur(10px) saturate(145%);
+      backdrop-filter:blur(10px) saturate(145%);
+    }
   }
 
   /* Skills */
@@ -653,6 +692,39 @@
 </footer>
 
 <script>
+  (function(){
+    var links = Array.from(document.querySelectorAll('#site-nav a[href^="#"]'));
+    var sections = links.map(function(link){
+      return document.querySelector(link.getAttribute('href'));
+    }).filter(Boolean);
+    var ticking = false;
+
+    function updateActiveSection(){
+      var marker = window.scrollY + window.innerHeight * 0.3;
+      var activeId = null;
+      sections.forEach(function(section){
+        if (section.offsetTop <= marker) activeId = section.id;
+      });
+      links.forEach(function(link){
+        var isActive = link.getAttribute('href') === '#' + activeId;
+        link.classList.toggle('active',isActive);
+        if (isActive) link.setAttribute('aria-current','location');
+        else link.removeAttribute('aria-current');
+      });
+      ticking = false;
+    }
+
+    function requestActiveSectionUpdate(){
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(updateActiveSection);
+    }
+
+    window.addEventListener('scroll',requestActiveSectionUpdate,{passive:true});
+    window.addEventListener('resize',requestActiveSectionUpdate);
+    updateActiveSection();
+  })();
+
   (function(){
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
