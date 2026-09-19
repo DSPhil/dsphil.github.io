@@ -47,17 +47,6 @@
     line-height:1.65;
     -webkit-font-smoothing:antialiased;
   }
-  body::after{
-    content:"";position:fixed;z-index:90;pointer-events:none;
-    inset:64px 0 0;background:rgba(248,248,245,0.22);
-    -webkit-backdrop-filter:blur(14px) saturate(145%);
-    backdrop-filter:blur(14px) saturate(145%);
-    opacity:0;visibility:hidden;
-    transition:opacity .2s ease,visibility 0s linear .2s;
-  }
-  html.nav-in-flight body::after{
-    opacity:1;visibility:visible;transition-delay:0s;
-  }
   img{max-width:100%;display:block;}
   a{color:inherit;}
   ul{margin:0;padding:0;list-style:none;}
@@ -80,12 +69,6 @@
     -webkit-backdrop-filter:blur(24px) saturate(180%);
     backdrop-filter:blur(24px) saturate(180%);
     border-bottom:1px solid rgba(255,255,255,0.76);
-    transition:background-color .2s ease,backdrop-filter .2s ease;
-  }
-  html.nav-in-flight .site-header{
-    background:rgba(248,248,245,0.8);
-    -webkit-backdrop-filter:blur(30px) saturate(180%);
-    backdrop-filter:blur(30px) saturate(180%);
   }
   .header-inner{
     max-width:var(--max-wide);margin:0 auto;padding:0 24px;
@@ -676,12 +659,10 @@
     var activeSection = null;
     var settleTimer = null;
     var fallbackTimer = null;
-    var revealTimer = null;
 
     function clearNavigationState(){
       clearTimeout(settleTimer);
       clearTimeout(fallbackTimer);
-      clearTimeout(revealTimer);
       document.documentElement.classList.remove('nav-in-flight');
       activeSection = null;
     }
@@ -693,11 +674,9 @@
       clearTimeout(settleTimer);
       clearTimeout(fallbackTimer);
       document.documentElement.classList.remove('nav-in-flight');
-      revealTimer = setTimeout(function(){
-        document.dispatchEvent(new CustomEvent('sectionnavigationarrived',{
-          detail:{section:arrivedSection}
-        }));
-      },200);
+      document.dispatchEvent(new CustomEvent('sectionnavigationarrived',{
+        detail:{section:arrivedSection}
+      }));
     }
 
     function scheduleArrival(){
