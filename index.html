@@ -334,15 +334,19 @@
   .social-links svg{width:20px;height:20px;}
 
   @media (prefers-reduced-motion:no-preference){
+    html.reveal-enabled main > .section:not(.reveal-visible) .section-inner{
+      opacity:0;
+    }
+    html.reveal-enabled main > .section.reveal-visible .section-inner{
+      animation:fade-reveal 0.55s linear both;
+    }
     html.reveal-enabled .reveal-item{
-      opacity:0;transform:translateY(10px);
+      transform:translateY(10px);
       clip-path:inset(0 100% 0 0);
     }
     html.reveal-enabled .reveal-visible .reveal-item{
-      animation:
-        write-reveal 0.55s cubic-bezier(0.22,1,0.36,1) both,
-        fade-reveal 0.55s linear both;
-      animation-delay:var(--reveal-delay,0ms),var(--reveal-delay,0ms);
+      animation:write-reveal 0.55s cubic-bezier(0.22,1,0.36,1) both;
+      animation-delay:var(--reveal-delay,0ms);
     }
     @keyframes write-reveal{
       0%{transform:translateY(10px);clip-path:inset(0 100% 0 0);}
