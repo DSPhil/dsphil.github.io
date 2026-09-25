@@ -339,13 +339,18 @@
       clip-path:inset(0 100% 0 0);
     }
     html.reveal-enabled .reveal-visible .reveal-item{
-      animation:write-reveal 0.55s cubic-bezier(0.22,1,0.36,1) both;
-      animation-delay:var(--reveal-delay,0ms);
+      animation:
+        write-reveal 0.55s cubic-bezier(0.22,1,0.36,1) both,
+        fade-reveal 0.55s linear both;
+      animation-delay:var(--reveal-delay,0ms),var(--reveal-delay,0ms);
     }
     @keyframes write-reveal{
-      0%{opacity:0;transform:translateY(10px);clip-path:inset(0 100% 0 0);}
-      45%{opacity:1;}
-      100%{opacity:1;transform:translateY(0);clip-path:inset(0 0 0 0);}
+      0%{transform:translateY(10px);clip-path:inset(0 100% 0 0);}
+      100%{transform:translateY(0);clip-path:inset(0 0 0 0);}
+    }
+    @keyframes fade-reveal{
+      0%{opacity:0;}
+      100%{opacity:1;}
     }
   }
 
@@ -780,6 +785,7 @@
       '.section-inner > h2',
       '.section-inner > .section-kicker',
       '.section-inner > .thesis-intro',
+      '.section-inner > .foreword-link',
       '.thesis-grid > .thesis-card',
       '.about-copy > h2',
       '.about-copy > p',
